@@ -7,7 +7,11 @@ import { getCollection } from 'astro:content';
 import { imageSrc } from './images';
 
 export const DEFAULT_AUTHOR = 'Antonina Devitska';
+// Shown when an entry has no image (same fallbacks the old Go backend applied).
 export const DEFAULT_ARTICLE_IMAGE = '/images/blog-1.png';
+export const DEFAULT_COURSE_IMAGE = '/images/service-1.png';
+export const DEFAULT_PROJECT_IMAGE = '/images/collaboration.jpg';
+export const DEFAULT_CERTIFICATE_IMAGE = '/images/blog-1.png';
 
 export interface Article {
   slug: string;
@@ -84,7 +88,7 @@ export async function getServiceCategories(): Promise<ServiceCategory[]> {
           duration: course.duration,
           enrollLink: course.enroll_link,
           tags: course.tags,
-          image: await imageSrc(course.image, 800),
+          image: await imageSrc(course.image, 800, DEFAULT_COURSE_IMAGE),
           category: data.slug,
         })),
       ),
@@ -107,8 +111,8 @@ export async function getCertificates(): Promise<Certificate[]> {
       title: data.title,
       issuer: data.issuer,
       year: data.year,
-      thumbnail: await imageSrc(data.image, 640),
-      image: await imageSrc(data.image, 1800),
+      thumbnail: await imageSrc(data.image, 640, DEFAULT_CERTIFICATE_IMAGE),
+      image: await imageSrc(data.image, 1800, DEFAULT_CERTIFICATE_IMAGE),
     })),
   );
 }
@@ -131,7 +135,7 @@ export async function getProjects(): Promise<Project[]> {
       detail: data.detail,
       linkLabel: data.link_label,
       linkHref: data.link_href,
-      image: await imageSrc(data.image, 1200),
+      image: await imageSrc(data.image, 1200, DEFAULT_PROJECT_IMAGE),
     })),
   );
 }

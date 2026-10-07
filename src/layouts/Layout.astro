@@ -1,0 +1,323 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Antonina Devitska | Human-Centered Teaching", 
+  description = "Educator, mentor, and course designer helping teachers integrate well-being, resilience, and innovation into learning."
+} = Astro.props;
+
+import ForumPopup from "../components/ForumPopup.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=PT+Serif:wght@700&family=Public+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <title>{title}</title>
+  </head>
+  <body>
+    <script>
+      document.documentElement.classList.add('js');
+      requestAnimationFrame(() => document.documentElement.classList.add('is-loaded'));
+
+      try {
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      } catch {}
+
+      const forceTopIfHash = () => {
+        if (location.hash === '#top') window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      };
+      window.addEventListener('load', () => {
+        forceTopIfHash();
+        requestAnimationFrame(forceTopIfHash);
+        setTimeout(forceTopIfHash, 0);
+        setTimeout(forceTopIfHash, 50);
+      });
+    </script>
+    <div id="top"></div>
+    <ForumPopup />
+    <slot />
+
+    <script type="module">
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion) {
+        const targets = Array.from(
+          document.querySelectorAll(
+            [
+
+              'main section',
+              'main article',
+              'main .service-card',
+              'main .course-card',
+              'main .blog-card',
+              'main .testimonial-card',
+              'main .value-pill',
+              'main .featured-approach-card',
+
+              'footer',
+            ].join(',')
+          )
+        ).filter((el) => el instanceof HTMLElement);
+
+        const shouldSkip = (el) => {
+          return (
+            el.classList.contains('hero') ||
+            el.closest('.hero') ||
+            el.classList.contains('page-hero') ||
+            el.closest('.page-hero') ||
+            el.classList.contains('header') ||
+            el.closest('.header')
+          );
+        };
+
+        const setDelay = (el) => {
+          const parent = el.parentElement;
+          if (!parent) return;
+
+          const staggerParents = [
+            '.services-grid',
+            '.courses-grid',
+            '.values-grid',
+            '.featured-approach-grid',
+            '.blog-grid',
+            '.slider-track',
+          ];
+          const doStagger = staggerParents.some((sel) => parent.matches(sel));
+          if (!doStagger) return;
+
+          const siblings = Array.from(parent.children).filter((c) => c instanceof HTMLElement);
+          const idx = siblings.indexOf(el);
+          const delay = Math.min(Math.max(idx, 0), 6) * 60;
+          el.style.setProperty('--reveal-delay', `${delay}ms`);
+        };
+
+        const isLandscape = window.matchMedia('(max-height: 500px)').matches;
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              const el = entry.target;
+              if (!(el instanceof HTMLElement)) continue;
+              if (entry.isIntersecting) {
+                el.classList.add('is-visible');
+                io.unobserve(el);
+              }
+            }
+          },
+          {
+            threshold: isLandscape ? 0.05 : 0.15,
+            rootMargin: isLandscape ? '0px' : '0px 0px -10% 0px'
+          }
+        );
+
+        for (const el of targets) {
+          if (shouldSkip(el)) continue;
+          if (!el.classList.contains('reveal')) el.classList.add('reveal');
+          setDelay(el);
+          io.observe(el);
+        }
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    /* Colors */
+    --color-primary: #8D77AB;
+    --color-primary-dark: #8E78AC;
+    --color-green-light: #BAD8B6;
+    --color-green-bg: #E7F0D4;
+    --color-green-card: #E1EACD;
+    --color-background: #F6F5F2;
+    --color-text-dark: #01162C;
+    --color-text-black: #000000;
+    --color-white: #FFFFFF;
+    --color-gray: #96989B;
+    --color-gray-light: rgba(255, 255, 255, 0.46);
+    
+    /* Gradients */
+    --gradient-banner: linear-gradient(
+      90deg,
+      rgba(186, 216, 182, 1) 0%,
+      rgba(186, 216, 182, 0.98) 22%,
+      rgba(141, 119, 171, 0.98) 78%,
+      rgba(141, 119, 171, 1) 100%
+    );
+    --gradient-cta: linear-gradient(
+      90deg,
+      rgba(185, 214, 182, 1) 0%,
+      rgba(185, 214, 182, 0.98) 22%,
+      rgba(141, 119, 171, 0.98) 78%,
+      rgba(141, 119, 171, 1) 100%
+    );
+    --gradient-hero: linear-gradient(
+      180deg,
+      rgba(186, 216, 182, 1) 0%,
+      rgba(186, 216, 182, 0.85) 40%,
+      rgba(190, 116, 246, 1) 100%
+    );
+    
+    /* Fonts */
+    --font-primary: 'Public Sans', sans-serif;
+    --font-secondary: 'Inter', sans-serif;
+    --font-accent: 'PT Serif', serif;
+    
+    /* Spacing */
+    --container-max: 1280px;
+    --section-padding: 80px;
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-primary);
+    background-color: var(--color-background);
+    color: var(--color-text-black);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+
+  html.js body {
+    opacity: 0;
+  }
+
+  html.js.is-loaded body {
+    opacity: 1;
+    transition: opacity 360ms ease;
+  }
+
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 560ms ease,
+      transform 560ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+
+  .page-hero,
+  .page-hero.reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    html.js body {
+      opacity: 1;
+    }
+
+    html.js.is-loaded body {
+      transition: none;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
+  
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+  }
+  
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+
+  .section-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 46px;
+    line-height: 1.14;
+    color: var(--color-text-black);
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 22px;
+    border-radius: 16px;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  .btn-secondary {
+    background-color: var(--color-white);
+    color: var(--color-text-black);
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--color-background);
+  }
+  
+  .btn-small {
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+</style>

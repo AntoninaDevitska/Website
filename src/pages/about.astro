@@ -1,0 +1,1278 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import Footer from '../components/Footer.astro';
+import { getCertificates } from '../utils/content';
+
+const certificates = await getCertificates();
+
+const breadcrumb = [
+  { label: 'Home', href: '/' },
+  { label: 'About the Founder', href: '/about' }
+];
+
+
+const aboutImages = [
+  { src: '/images/about/about-3.jpg', alt: 'Antonina Devitska portrait 3' },
+  { src: '/images/about/about-4.jpg', alt: 'Antonina Devitska portrait 4' },
+  { src: '/images/about/about-2.jpg', alt: 'Antonina Devitska portrait 2' },
+  { src: '/images/about/about-1.jpg', alt: 'Antonina Devitska portrait 1' },
+];
+
+const socialLinks = [
+{ 
+    name: 'Instagram', 
+    href: 'https://www.instagram.com/devitska.education?igsh=dTRsZXZlYjJmNHhu&utm_source=qr',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.054 1.17-.248 1.805-.413 2.227-.217.562-.477.96-.896 1.382-.419.419-.818.679-1.381.896-.422.164-1.057.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.013-4.85-.07c-1.17-.054-1.805-.248-2.227-.413-.562-.217-.96-.477-1.382-.896-.419-.419-.679-.818-.896-1.381-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.013-3.584.07-4.85c.054-1.17.248-1.805.413-2.227.217-.562.477-.96.896-1.382.419-.419.818-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.266-.057 1.646-.07 4.85-.07zM12 0C8.741 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053 0.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.337 1.078 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.078-1.337 1.384-2.126c.296-.765.499-1.636.558-2.913.058-1.28.072-1.687.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.337-1.078-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="currentColor"/>
+    </svg>`
+  },
+  { 
+    name: 'Facebook', 
+    href: 'https://www.facebook.com/HorvatErikAntonina?mibextid=LQQJ4d&rdid=rQsXyuheqZRclwvF&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18uuFgH722%2F%3Fmibextid%3DLQQJ4d%23',
+    icon: `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.39703 17.9978V9.80078H9.16203L9.57303 6.59178H6.39703V4.54778C6.39703 3.62178 6.65503 2.98778 7.98403 2.98778H9.66803V0.126781C8.84903 0.0387813 8.02503 -0.00421875 7.20103 0.000781254C4.75703 0.000781254 3.07903 1.49178 3.07903 4.23078V6.58578H0.332031V9.79478H3.08503V17.9978H6.39703Z" fill="currentColor"/>
+    </svg>`
+  },
+  { 
+    name: 'LinkedIn', 
+    href: 'https://www.linkedin.com/in/antonina-devitska-199017266/',
+    icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3.58065 16H0.264516V5.31742H3.58065V16ZM1.92097 3.86H1.9C0.754839 3.86 0 3.07097 0 2.08387C0 1.07613 0.776774 0.30968 1.94258 0.30968C3.10839 0.30968 3.84129 1.07613 3.86323 2.08387C3.86323 3.07097 3.10839 3.86 1.92097 3.86ZM16 16H12.6839V10.3277C12.6839 8.99355 12.2097 8.08387 11.0006 8.08387C10.0684 8.08387 9.51226 8.7029 9.27097 9.30129C9.18581 9.50645 9.16387 9.78839 9.16387 10.0716V16H5.84774C5.84774 16 5.89161 6.65548 5.84774 5.31742H9.16387V6.72516C9.60258 6.05935 10.38 5.11097 12.1877 5.11097C14.4335 5.11097 16 6.47742 16 9.91355V16Z" fill="currentColor"/>
+    </svg>`
+  },
+  { 
+    name: 'Google Scholar', 
+    href: 'https://scholar.google.com/citations?user=W-nlvG0AAAAJ&hl',
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.547 11.249 14.967 9.5 12 9.5s-5.547 1.749-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z" fill="currentColor"/>
+    </svg>`
+  },
+  { 
+    name: 'ResearchGate', 
+    href: 'https://www.researchgate.net/profile/Antonina-Devitska?ev=hdr_xprf',
+    icon: `<span class="rg-text">R<sup>G</sup></span>`
+  }
+];
+
+const approachItems = [
+  {
+    title: 'Living Process',
+    image: '/images/approach/approach-1.png',
+    description:
+      'We approach education as a living process, not a fixed system, ensuring learning remains dynamic and evolving.',
+  },
+  {
+    title: 'Safe & Supported',
+    image: '/images/approach/approach-2.png',
+    description:
+      'We create learning environments where people feel safe, seen, and supported to explore their full potential.',
+  },
+  {
+    title: 'Experiential Practices',
+    image: '/images/approach/approach-3.png',
+    description:
+      'We combine academic rigor with reflective and experiential practices for deeper, more meaningful integration.',
+  },
+  {
+    title: 'Adaptable Learning',
+    image: '/images/approach/approach-4.png',
+    description:
+      'We value learning that is practical, meaningful, and adaptable to real-life and professional contexts.',
+  },
+];
+
+const valueItems = [
+  { 
+    title: 'Human-Centered', 
+    description: 'Placing people at the heart of experience. Learning honors emotions, individuality, and personal meaning.' 
+  },
+  { 
+    title: 'Wellbeing', 
+    description: 'A core element of effective teaching and leadership. Sustainable education is not possible without care.' 
+  },
+  { 
+    title: 'Resilience', 
+    description: 'Developing self-awareness and emotional intelligence for working in complex, uncertain environments.' 
+  },
+  { 
+    title: 'Integrity', 
+    description: 'Grounded in research and professional depth. We value clarity, responsibility, and ethical collaboration.' 
+  },
+  { 
+    title: 'Growth', 
+    description: 'Curiosity and reflection are essential. We believe learning does not end with formal education.' 
+  },
+];
+---
+
+<Layout title="About the Founder | Antonina Devitska" description="Learn more about Antonina Devitska - educator, mentor, and course designer with 19 years of experience.">
+  <Header currentPage="about" />
+  
+  <main>
+    <PageHero 
+      title="Meet the Founder" 
+      breadcrumb={breadcrumb}
+    />
+    
+    <section class="about-section">
+      <div class="container">
+
+        <div class="marquee-container">
+          <p class="marquee-text">ANTONINA DEVITSKA - MENTOR. TEACHER. TRAINER. FACILITATOR</p>
+        </div>
+        
+        <div class="about-content">
+          <div class="about-image">
+            <div class="about-carousel" aria-label="About photos" data-about-carousel>
+              <button class="about-carousel-nav prev" type="button" aria-label="Previous photo" data-about-prev>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+
+              <div class="about-carousel-viewport" data-about-viewport>
+                <div class="about-carousel-track" data-about-track>
+                  {aboutImages.map((img) => (
+                    <div class="about-carousel-slide">
+                      <img src={img.src} alt={img.alt} loading="lazy" class="about-carousel-img" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <button class="about-carousel-nav next" type="button" aria-label="Next photo" data-about-next>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              <div class="about-carousel-dots" aria-label="Carousel pagination" data-about-dots>
+                {aboutImages.map((_, i) => (
+                  <button class:list={['dot', { active: i === 0 }]} type="button" aria-label={`Go to photo ${i + 1}`} data-about-dot={i}></button>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div class="about-text" data-about-text>
+            <p>
+              Antonina Devitska is an academic leader and interdisciplinary educator with over 22 years of teaching experience, deep expertise in innovative pedagogy, curriculum design, and international collaboration. Her work is driven by a commitment to human‑centered teaching that empowers learners, nurtures community through trust and connection, and integrates social‑emotional learning, educator leadership, and wellbeing in secondary and higher education in Ukraine and beyond.            </p>
+            
+            <div class="social-links">
+              {socialLinks.map(link => (
+                <a 
+                  href={link.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="social-link"
+                  aria-label={link.name}
+                >
+                  <Fragment set:html={link.icon} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificates Timeline Section -->
+        {certificates.length > 0 && (
+          <div class="certificates-section">
+            <div class="certificates-header">
+              <h3>Professional Certifications</h3>
+              <a href="https://www.uzhnu.edu.ua/uk/infocentre/80899" target="_blank" rel="noopener noreferrer" class="view-more-certs">
+                View all certificates →
+              </a>
+            </div>
+            
+            <div class="certificates-outer-wrapper">
+              <div class="slider-nav prev" id="slider-prev">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </div>
+              <div class="slider-nav next" id="slider-next">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+              
+              <div class="certificates-slider-container" id="cert-slider-container">
+                <div class="certificates-slider" id="cert-slider">
+                  {certificates.map(cert => (
+                    <div class="cert-card" data-full={cert.image}>
+                      <div class="cert-year-badge">{cert.year}</div>
+                      <div class="cert-image-wrapper">
+                        <img src={cert.thumbnail} alt={cert.title} loading="lazy" />
+                        <div class="cert-overlay">
+                          <div class="view-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                              <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <span>View</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cert-info">
+                        <div class="cert-issuer">{cert.issuer}</div>
+                        <h4>{cert.title}</h4>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div class="slider-dots" id="slider-dots"></div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="cert-lightbox" class="lightbox">
+      <span class="lightbox-close">&times;</span>
+      <img class="lightbox-content" id="lightbox-img" src="" alt="Certificate" />
+    </div>
+  </main>
+
+  <section class="approach-section">
+    <div class="container">
+      <div class="approach-intro">
+        <h2>Our Approach</h2>
+        <p style="margin-top: 20px; font-size: 18px; color: var(--color-text-muted); line-height: 1.6;">
+          Our courses, workshops, and retreats are built to support both intellectual development and emotional wellbeing, 
+          allowing learners to grow without pressure and perform without burnout.
+        </p>
+      </div>
+  
+      <div class="featured-approach-grid">
+        {approachItems.map(item => (
+          <article class="featured-approach-card">
+            <div class="featured-approach-image">
+              <img src={item.image} alt={item.title} />
+            </div>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+  
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 60px; padding: 20px; border-top: 1px solid rgba(141, 119, 171, 0.2);">
+          <p style="font-size: 18px; font-style: italic;">
+              We design programs that <strong>respect</strong> individual pace, lived experience, and professional identity.
+          </p>
+      </div>
+  
+      <div class="approach-intro">
+        <h2>Our Values</h2>
+      </div>
+  
+      <div class="values-grid">
+        {valueItems.map(value => (
+          <div class="value-pill">
+            <h4>{value.title}</h4>
+            <p>{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</Layout>
+
+<script>
+  // About carousel
+  const viewport = document.querySelector('[data-about-viewport]') as HTMLElement | null;
+  const track = document.querySelector('[data-about-track]') as HTMLElement | null;
+  const aboutPrevBtn = document.querySelector('[data-about-prev]') as HTMLButtonElement | null;
+  const aboutNextBtn = document.querySelector('[data-about-next]') as HTMLButtonElement | null;
+  const aboutDotsWrap = document.querySelector('[data-about-dots]') as HTMLElement | null;
+  const aboutCarousel = document.querySelector('[data-about-carousel]') as HTMLElement | null;
+  const aboutText = document.querySelector('[data-about-text]') as HTMLElement | null;
+
+  // On desktop, match the carousel height to the text block height (text + socials),
+  // so the left image doesn't look taller than the right column.
+  const syncAboutCarouselHeight = () => {
+    if (!aboutCarousel || !aboutText) return;
+    const isDesktop = window.matchMedia('(min-width: 901px)').matches;
+    if (!isDesktop) {
+      aboutCarousel.style.height = '';
+      return;
+    }
+    // Use content height (not a stretched box height)
+    aboutCarousel.style.height = `${aboutText.scrollHeight}px`;
+  };
+
+  const rafSync = () => requestAnimationFrame(syncAboutCarouselHeight);
+  window.addEventListener('resize', rafSync);
+  window.addEventListener('load', rafSync);
+
+  // Re-sync when the right column changes size (fonts, responsive reflow, etc.)
+  if (typeof ResizeObserver !== 'undefined' && aboutText) {
+    const ro = new ResizeObserver(() => rafSync());
+    ro.observe(aboutText);
+  }
+
+  // Also re-sync once images in the carousel have loaded (in case layout shifts)
+  document.querySelectorAll<HTMLImageElement>('[data-about-carousel] img').forEach((img) => {
+    if (img.complete) return;
+    img.addEventListener('load', rafSync, { once: true });
+  });
+
+  const getSlideWidth = () => {
+    if (!track) return 0;
+    const first = track.querySelector('.about-carousel-slide') as HTMLElement | null;
+    if (!first) return 0;
+    const style = window.getComputedStyle(track);
+    const gap = parseFloat(style.columnGap || style.gap || '0') || 0;
+    return first.getBoundingClientRect().width + gap;
+  };
+
+  const setActiveDot = (idx: number) => {
+    if (!aboutDotsWrap) return;
+    const dots = Array.from(aboutDotsWrap.querySelectorAll<HTMLButtonElement>('[data-about-dot]'));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  };
+
+  const getIndexFromScroll = () => {
+    if (!viewport) return 0;
+    const w = getSlideWidth();
+    if (!w) return 0;
+    return Math.round(viewport.scrollLeft / w);
+  };
+
+  const scrollToIndex = (idx: number) => {
+    if (!viewport) return;
+    const w = getSlideWidth();
+    viewport.scrollTo({ left: idx * w, behavior: 'smooth' });
+    setActiveDot(idx);
+  };
+
+  aboutPrevBtn?.addEventListener('click', () => {
+    const idx = Math.max(0, getIndexFromScroll() - 1);
+    scrollToIndex(idx);
+  });
+
+  aboutNextBtn?.addEventListener('click', () => {
+    if (!track) return;
+    const slides = track.querySelectorAll('.about-carousel-slide').length;
+    const idx = Math.min(slides - 1, getIndexFromScroll() + 1);
+    scrollToIndex(idx);
+  });
+
+  aboutDotsWrap?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    const btn = target?.closest?.('[data-about-dot]') as HTMLElement | null;
+    if (!btn) return;
+    const idx = Number(btn.getAttribute('data-about-dot') || '0');
+    scrollToIndex(idx);
+  });
+
+  viewport?.addEventListener('scroll', () => {
+    setActiveDot(getIndexFromScroll());
+  });
+
+  // initial sizing after layout
+  requestAnimationFrame(syncAboutCarouselHeight);
+
+  // Lightbox functionality
+  const lightbox = document.getElementById('cert-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const closeBtn = document.querySelector('.lightbox-close');
+  const certCards = document.querySelectorAll('.cert-card');
+
+  certCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const fullImg = card.getAttribute('data-full');
+      if (fullImg && lightbox && lightboxImg) {
+        lightboxImg.src = fullImg;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+      }
+    });
+  });
+
+  if (closeBtn && lightbox) {
+    closeBtn.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+  }
+
+  // Horizontal scroll drag functionality
+  const slider = document.getElementById('cert-slider-container') as HTMLElement;
+  let isDown = false;
+  let startX: number;
+  let scrollLeft: number;
+
+  if (slider) {
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  }
+
+  // Slider Navigation Arrows
+  const nextBtn = document.getElementById('slider-next');
+  const prevBtn = document.getElementById('slider-prev');
+
+  if (nextBtn && prevBtn && slider) {
+    nextBtn.addEventListener('click', () => {
+      slider.scrollLeft += 340; 
+    });
+
+    prevBtn.addEventListener('click', () => {
+      slider.scrollLeft -= 340;
+    });
+
+    const updateButtons = () => {
+      prevBtn.style.opacity = slider.scrollLeft <= 0 ? '0' : '1';
+      prevBtn.style.pointerEvents = slider.scrollLeft <= 0 ? 'none' : 'auto';
+      
+      const isEnd = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5;
+      nextBtn.style.opacity = isEnd ? '0' : '1';
+      nextBtn.style.pointerEvents = isEnd ? 'none' : 'auto';
+    };
+
+    slider.addEventListener('scroll', updateButtons);
+    window.addEventListener('resize', updateButtons);
+    updateButtons();
+  }
+
+  const dotsContainer = document.getElementById('slider-dots');
+  const certs = document.querySelectorAll('.cert-card');
+  
+  if (dotsContainer && certs.length > 0) {
+    certs.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = `dot ${i === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => {
+        if (slider) {
+          const cardWidth = certs[0].clientWidth + 40; 
+          slider.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+        }
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    if (slider) {
+      slider.addEventListener('scroll', () => {
+        const cardWidth = certs[0].clientWidth + 40;
+        const activeIndex = Math.round(slider.scrollLeft / cardWidth);
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === activeIndex);
+        });
+      });
+    }
+  }
+</script>
+
+<style>
+  .about-section {
+    padding: 60px 0 0px;
+  }
+  
+  .marquee-container {
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  
+  .marquee-text {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--color-primary);
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    -webkit-text-stroke: 0.5px var(--color-primary);
+  }
+  
+  .about-content {
+  display: grid;
+  grid-template-columns: 533px 1fr;
+  gap: 80px;
+  /* Don't stretch columns to the tallest item; we want photo height to match the text column */
+  align-items: start;
+}
+
+  
+ .about-image {
+  height: auto;
+  display: flex;
+  align-self: start;
+}
+
+  /* About carousel */
+  .about-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-white);
+  }
+
+  .about-carousel-viewport {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .about-carousel-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .about-carousel-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    height: 100%;
+  }
+
+  .about-carousel-slide {
+    scroll-snap-align: center;
+    height: 100%;
+  }
+
+  .about-carousel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  @media (min-width: 901px) {
+    .about-carousel {
+      --about-image-y: 8%;
+    }
+
+    .about-carousel .about-carousel-img {
+      object-position: center var(--about-image-y) !important;
+    }
+  }
+
+  .about-carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-primary);
+    display: grid;
+    place-items: center;
+    z-index: 3;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .about-carousel-nav.prev {
+    left: 12px;
+  }
+
+  .about-carousel-nav.next {
+    right: 12px;
+  }
+
+  .about-carousel-dots {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 4;
+  }
+
+  .about-carousel-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(141, 119, 171, 0.35);
+    border: 0;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-block;
+    flex: 0 0 auto;
+    cursor: pointer;
+  }
+
+  .about-carousel-dots .dot.active {
+    background: var(--color-primary);
+    transform: scale(1.15);
+  }
+  
+  .about-text {
+  padding-top: 20px;
+  /* Let content define the column height so the photo can match it */
+  max-height: none;
+  overflow: visible;
+  align-self: start;
+}
+
+  
+  .about-text p {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.8;
+    color: var(--color-text-black);
+    margin-bottom: 40px;
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-white);
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .social-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+  
+  .social-link :global(svg) {
+    transition: transform 0.3s ease;
+  }
+  
+  .social-link :global(.rg-text) {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--color-primary);
+    transition: color 0.3s ease;
+  }
+  
+  .social-link :global(.rg-text sup) {
+    font-size: 8px;
+    vertical-align: super;
+  }
+  
+  .social-link:hover :global(.rg-text) {
+    color: var(--color-white);
+  }
+  
+  .approach-section {
+    padding: 0px 0 120px;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(234,246,243,0.6) 100%);
+  }
+
+  /* Certificates Section */
+  .certificates-section {
+    margin-top: 40px;
+    position: relative;
+    padding: 10px 0;
+  }
+
+  .certificates-outer-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  .certificates-outer-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      rgba(141, 119, 171, 0) 0%, 
+      rgba(141, 119, 171, 0.2) 15%, 
+      rgba(141, 119, 171, 0.2) 85%, 
+      rgba(141, 119, 171, 0) 100%
+    );
+    z-index: 0;
+    transform: translateY(-50%);
+  }
+
+  .certificates-header {
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .certificates-header h3 {
+    font-size: 34px;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-family: var(--font-primary);
+  }
+
+  .view-more-certs {
+    display: inline-block;
+    font-family: var(--font-secondary);
+    font-size: 18px;
+    color: var(--color-primary);
+    text-decoration: none;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .view-more-certs:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+    transform: translateX(5px);
+  }
+
+  .certificates-slider-container {
+    overflow-x: auto;
+    padding: 0px 20px 18px;
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    z-index: 1;
+  }
+
+  .certificates-slider-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(141, 119, 171, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: var(--color-primary);
+    transform: scale(1.2);
+  }
+
+  @media (min-width: 769px) {
+    .slider-dots { display: none; }
+  }
+
+  .slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(141, 119, 171, 0.1);
+  }
+
+  .slider-nav:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .slider-nav.prev { left: -25px; }
+  .slider-nav.next { right: -25px; }
+
+  @media (max-width: 1200px) {
+    .slider-nav.prev { left: 10px; }
+    .slider-nav.next { right: 10px; }
+  }
+
+  @media (max-width: 768px) {
+    .slider-nav { display: none; }
+    
+    .certificates-section {
+      margin-top: 40px;
+      padding: 10px 0;
+    }
+
+    .certificates-header {
+      margin-bottom: 8px;
+    }
+
+    .certificates-header h3 {
+      font-size: 26px;
+    }
+
+    .certificates-slider-container {
+      padding: 10px 10px 6px;
+    }
+
+    .cert-card {
+      flex: 0 0 280px;
+      padding: 16px;
+    }
+
+    .cert-year-badge {
+      width: 50px;
+      height: 50px;
+      font-size: 12px;
+      top: -10px;
+      right: -10px;
+    }
+
+    .cert-image-wrapper {
+      height: 180px;
+    }
+  }
+
+  .certificates-slider {
+    display: flex;
+    gap: 40px;
+    padding: 40px 10px;
+    align-items: stretch;
+  }
+
+  .cert-card {
+    flex: 0 0 320px;
+    background: var(--color-white);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: center;
+    border: 1px solid rgba(141, 119, 171, 0.1);
+  }
+
+  .cert-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(141, 119, 171, 0.15);
+    border-color: var(--color-primary);
+  }
+
+  .cert-year-badge {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 60px;
+    height: 60px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(141, 119, 171, 0.4);
+    z-index: 10;
+    border: 4px solid var(--color-white);
+    transition: transform 0.3s ease;
+  }
+
+  .cert-card:hover .cert-year-badge {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .cert-image-wrapper {
+    position: relative;
+    height: 220px;
+    background: #ffffff;
+    overflow: hidden;
+    margin-bottom: 24px;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cert-image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    padding: 12px;
+    transition: transform 0.6s ease;
+  }
+
+  .cert-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(141, 119, 171, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .cert-card:hover .cert-overlay {
+    opacity: 1;
+  }
+
+  .view-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .cert-card:hover .view-icon {
+    transform: translateY(0);
+  }
+
+  .view-icon span {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .cert-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cert-issuer {
+    font-size: 13px;
+    color: var(--color-primary);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+    font-family: var(--font-secondary);
+  }
+
+  .cert-info h4 {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text-dark);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 40px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+
+  
+  .approach-intro {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+
+  .approach-intro h2 {
+    font-size: 34px;
+    margin: 8px 0 0;
+    text-align: center;
+  }
+
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .featured-approach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .featured-approach-card {
+    padding: 26px;
+    border-radius: 28px;
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 18px 45px rgba(17, 82, 62, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .featured-approach-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2px;
+    align-self: center;
+  }
+
+  .featured-approach-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .featured-approach-card h3 {
+    margin: 0;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .featured-approach-card p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .featured-approach-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+  }
+
+  .featured-approach-tag {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--color-primary);
+  }
+
+  .approach-header {
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .approach-header p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .approach-card {
+    padding: 28px;
+    border-radius: 24px;
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .approach-icon {
+    font-size: 28px;
+  }
+
+  .approach-card h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .approach-card p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .values-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .value-pill {
+    padding: 18px;
+    border-radius: 16px;
+    background: var(--color-green-card);
+    border: 1px dashed var(--color-primary);
+  }
+
+  .value-pill h4 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .value-pill p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+  
+  @media (max-width: 1100px) {
+    .about-content {
+      grid-template-columns: 400px 1fr;
+      gap: 50px;
+    }
+    
+    .about-text p {
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    
+    .about-image {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .about-carousel {
+      min-height: 360px;
+      aspect-ratio: 4 / 5;
+    }
+    
+    .marquee-text {
+      font-size: 18px;
+    }
+
+    .social-links {
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .about-carousel-nav {
+      display: none;
+    }
+
+    .about-carousel {
+      min-height: 320px;
+      aspect-ratio: 4 / 5;
+    }
+    .about-section {
+      padding: 40px 0 60px;
+    }
+    
+    .about-text p {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    /* On phones this text must never be clipped */
+    .marquee-container {
+      overflow: visible;
+    }
+    
+    .marquee-text {
+      font-size: 14px;
+      line-height: 1.3;
+      white-space: normal;
+      padding: 0 8px;
+    }
+  }
+</style>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BREATHE Forum — June 27th, 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --midnight: #0a0f1e;
+      --deep-navy: #111827;
+      --navy: #1a2540;
+      --teal: #00c2a8;
+      --teal-dim: rgba(0,194,168,0.13);
+      --teal-glow: rgba(0,194,168,0.35);
+      --coral: #ff6f59;
+      --coral-dim: rgba(255,111,89,0.12);
+      --gold: #e8b86d;
+      --gold-dim: rgba(232,184,109,0.13);
+      --off-white: #f2ede6;
+      --light-gray: #d4cfc8;
+      --muted: #8a9ab5;
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--midnight);
+      color: var(--off-white);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      position: relative;
+      overflow: hidden;
+      background: var(--midnight);
+    }
+
+    .hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+    .glow-1 {
+      position: absolute; width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,194,168,0.14) 0%, transparent 65%);
+      top: -200px; right: -150px;
+      animation: pulse 8s ease-in-out infinite;
+    }
+    .glow-2 {
+      position: absolute; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,111,89,0.10) 0%, transparent 65%);
+      bottom: -100px; left: -80px;
+      animation: pulse 10s ease-in-out infinite reverse;
+    }
+    .glow-3 {
+      position: absolute; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(232,184,109,0.07) 0%, transparent 65%);
+      top: 40%; left: 30%;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.08); opacity: 0.75; }
+    }
+
+    .grid-lines {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,194,168,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,194,168,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .diagonal-bar {
+      position: absolute; width: 3px; height: 220px;
+      background: linear-gradient(to bottom, transparent, var(--teal), transparent);
+      top: 15%; right: 22%; transform: rotate(20deg); opacity: 0.4;
+    }
+    .diagonal-bar-2 {
+      position: absolute; width: 2px; height: 140px;
+      background: linear-gradient(to bottom, transparent, var(--coral), transparent);
+      bottom: 25%; left: 15%; transform: rotate(-15deg); opacity: 0.35;
+    }
+
+    nav {
+      position: relative; z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 2rem 6%;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700;
+      letter-spacing: 0.22em; color: var(--off-white);
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+    .nav-date {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); background: var(--teal-dim); padding: 0.45rem 1.1rem;
+      border-radius: 50px; border: 1px solid rgba(0,194,168,0.3);
+    }
+    .nav-register {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--midnight); background: var(--teal); padding: 0.45rem 1.3rem;
+      border-radius: 50px; text-decoration: none; transition: all 0.3s ease;
+    }
+    .nav-register:hover { background: #00dfc0; transform: translateY(-1px); }
+
+    .hero-body {
+      display: flex; flex-direction: column; justify-content: center;
+      align-items: center; text-align: center; padding: 4rem 6%;
+      position: relative; z-index: 5;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+    .eyebrow::before, .eyebrow::after { content: ''; width: 30px; height: 1px; background: var(--teal); opacity: 0.6; }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5.5rem, 16vw, 13rem);
+      font-weight: 900; line-height: 0.88; letter-spacing: -0.02em; color: var(--off-white);
+      opacity: 0; animation: fadeUp 0.9s ease forwards 0.4s;
+    }
+    .hero-title .accent-word {
+      display: block;
+      background: linear-gradient(135deg, var(--teal) 0%, #00e8ca 50%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      font-style: italic;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300; color: var(--muted);
+      margin-top: 2rem; max-width: 560px; line-height: 1.75;
+      opacity: 0; animation: fadeUp 0.9s ease forwards 0.6s;
+    }
+    .hero-tagline strong { color: var(--light-gray); font-weight: 500; }
+
+    .hero-pills {
+      display: flex; gap: 0.8rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center;
+      opacity: 0; animation: fadeUp 0.9s ease forwards 0.8s;
+    }
+    .pill {
+      display: flex; align-items: center; gap: 0.45rem;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em;
+      padding: 0.5rem 1.1rem; border-radius: 50px;
+      border: 1px solid var(--card-border); background: var(--card-bg); color: var(--light-gray);
+    }
+    .pill.teal  { border-color: rgba(0,194,168,0.3);   color: var(--teal);  background: var(--teal-dim); }
+    .pill.coral { border-color: rgba(255,111,89,0.3);  color: var(--coral); background: var(--coral-dim); }
+    .pill.gold  { border-color: rgba(232,184,109,0.3); color: var(--gold);  background: var(--gold-dim); }
+
+    .hero-cta { margin-top: 3.5rem; opacity: 0; animation: fadeUp 0.9s ease forwards 1s; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 1rem 2.8rem;
+      background: linear-gradient(135deg, var(--teal), #00dfc0);
+      color: var(--midnight); text-decoration: none;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      border-radius: 50px; transition: all 0.3s ease;
+      box-shadow: 0 0 30px var(--teal-glow);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px var(--teal-glow), 0 10px 30px rgba(0,0,0,0.3); }
+    .btn-arrow { font-size: 1rem; transition: transform 0.3s ease; }
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+
+    .scroll-hint {
+      position: relative; z-index: 5; text-align: center; padding: 2rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+      opacity: 0; animation: fadeIn 1s ease forwards 1.4s;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+      animation: lineGrow 1.5s ease-in-out infinite;
+    }
+
+    @keyframes lineGrow { 0%,100% { opacity:0.3; transform:scaleY(0.6); } 50% { opacity:1; transform:scaleY(1); } }
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+
+    .divider { height:1px; background: linear-gradient(to right, transparent, var(--card-border), transparent); margin: 0 6%; }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+      max-width: 1280px; margin: 0 auto; padding: 7rem 6%;
+    }
+    .section-label {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15;
+      color: var(--off-white); margin-bottom: 1.8rem;
+    }
+    .section-title em { color: var(--teal); font-style: italic; }
+    .about-text p { font-size: 1rem; line-height: 1.85; color: var(--muted); margin-bottom: 1.2rem; font-weight: 300; }
+    .about-text p strong { color: var(--light-gray); font-weight: 500; }
+
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px;
+      padding: 2rem 1.8rem; text-align: center; position: relative; overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--teal-dim), transparent);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .stat-card:hover { border-color: rgba(0,194,168,0.3); transform: translateY(-4px); }
+    .stat-card:hover::before { opacity: 1; }
+    .stat-card:nth-child(2) { margin-top: 1.5rem; }
+    .stat-card:nth-child(4) { margin-top: -1.5rem; }
+    .stat-num {
+      font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; position: relative; z-index: 1;
+    }
+    .stat-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; color: var(--muted); margin-top: 0.5rem; text-transform: uppercase; position: relative; z-index: 1; }
+
+    /* ── SESSIONS ── */
+    .sessions-section {
+      padding: 7rem 6%;
+      background: var(--deep-navy);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .sessions-header {
+      max-width: 1280px; margin: 0 auto 4rem;
+      display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem;
+    }
+    .sessions-badge {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 110px; height: 110px; border-radius: 50%;
+      border: 2px solid rgba(0,194,168,0.3);
+      background: var(--teal-dim);
+      position: relative;
+    }
+    .sessions-badge::before {
+      content: '';
+      position: absolute; inset: -8px; border-radius: 50%;
+      border: 1px dashed rgba(0,194,168,0.2);
+      animation: slowSpin 20s linear infinite;
+    }
+    @keyframes slowSpin { to { transform: rotate(360deg); } }
+    .badge-num {
+      font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1;
+    }
+    .badge-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-top: 0.2rem; }
+
+    .sessions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px; max-width: 1280px; margin: 0 auto;
+      background: var(--card-border); border-radius: 20px; overflow: hidden;
+    }
+    /* last item (7th) spans to fill nicely */
+    .session-card:last-child { grid-column: 2 / 3; }
+
+    .session-card {
+      background: var(--deep-navy); padding: 2.2rem 2rem;
+      position: relative; overflow: hidden; transition: all 0.3s ease; cursor: default;
+    }
+    .session-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--coral));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .session-card:hover { background: var(--navy); }
+    .session-card:hover::after { transform: scaleX(1); }
+    .session-number {
+      font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700;
+      color: rgba(0,194,168,0.18); line-height: 1; margin-bottom: 1rem;
+    }
+    .session-name { font-size: 1rem; font-weight: 500; line-height: 1.4; color: var(--off-white); }
+    .session-tag {
+      display: inline-block; margin-top: 0.8rem;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.25rem 0.75rem; border-radius: 50px;
+    }
+    .tag-tech { color: var(--teal);  background: var(--teal-dim); }
+    .tag-well { color: #b69fea;      background: rgba(182,159,234,0.12); }
+    .tag-ped  { color: var(--gold);  background: var(--gold-dim); }
+    .tag-res  { color: var(--coral); background: var(--coral-dim); }
+    .tag-art  { color: #f4a7b9;      background: rgba(244,167,185,0.12); }
+    .tag-eng  { color: #7dd8f0;      background: rgba(125,216,240,0.12); }
+
+    /* ── PARTNERS ── */
+    .partners-section { padding: 7rem 6%; text-align: center; }
+    .partners-header { max-width: 560px; margin: 0 auto 4rem; }
+    .partners-header p { font-size: 1rem; line-height: 1.75; color: var(--muted); font-weight: 300; margin-top: 1rem; }
+
+    .partners-row {
+      display: flex; justify-content: center; align-items: stretch;
+      gap: 1.5rem; flex-wrap: wrap; max-width: 1000px; margin: 0 auto;
+    }
+
+    .partner-card {
+      background: white;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 2.2rem 2.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      transition: all 0.35s ease; flex: 1; min-width: 240px; max-width: 300px;
+      position: relative; overflow: hidden;
+    }
+    .partner-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--coral));
+      transform: scaleX(0); transition: transform 0.4s ease;
+    }
+    .partner-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,194,168,0.10); }
+    .partner-card:hover::before { transform: scaleX(1); }
+
+    .partner-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--off-white); letter-spacing: 0.04em;
+      text-align: center;
+    }
+
+    .partner-role {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    /* ── REGISTER ── */
+    .register-section {
+      padding: 9rem 6%; text-align: center; position: relative; overflow: hidden;
+      background: var(--deep-navy); border-top: 1px solid var(--card-border);
+    }
+    .register-section::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 50% 50%, rgba(0,194,168,0.09), transparent),
+        radial-gradient(ellipse 30% 50% at 80% 20%, rgba(255,111,89,0.07), transparent);
+      pointer-events: none;
+    }
+    .register-inner { position: relative; z-index: 2; }
+    .register-date {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; line-height: 1;
+      color: transparent; -webkit-text-stroke: 1px rgba(0,194,168,0.35); margin-bottom: 1.5rem;
+    }
+    .register-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 700; color: var(--off-white);
+      line-height: 1.2; margin-bottom: 1.5rem;
+    }
+    .register-headline span {
+      background: linear-gradient(135deg, var(--teal), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .register-sub { font-size: 1rem; font-weight: 300; color: var(--muted); max-width: 480px; margin: 0 auto 3rem; line-height: 1.8; }
+    .btn-register {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      padding: 1.15rem 3.5rem;
+      background: linear-gradient(135deg, var(--coral), #ff8c7a);
+      color: white; text-decoration: none;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      border-radius: 50px; transition: all 0.3s ease;
+      box-shadow: 0 0 40px rgba(255,111,89,0.35);
+    }
+    .btn-register:hover { transform: translateY(-3px); box-shadow: 0 0 60px rgba(255,111,89,0.5), 0 10px 30px rgba(0,0,0,0.3); }
+    .register-note {
+      margin-top: 1.8rem; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em;
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .register-note span::before { content: '✓ '; color: var(--teal); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--midnight); border-top: 1px solid var(--card-border);
+      color: var(--muted); text-align: center; padding: 2.5rem 6%;
+      font-size: 0.75rem; letter-spacing: 0.08em;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: var(--off-white); margin-bottom: 0.8rem; }
+    .footer-logo span { color: var(--teal); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+      .sessions-grid { grid-template-columns: 1fr 1fr; }
+      .session-card:last-child { grid-column: auto; }
+      .sessions-header { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .sessions-grid { grid-template-columns: 1fr; }
+      .session-card:last-child { grid-column: auto; }
+      .nav-register { display: none; }
+      .stats-grid .stat-card:nth-child(2),
+      .stats-grid .stat-card:nth-child(4) { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="glow-1"></div><div class="glow-2"></div><div class="glow-3"></div>
+    <div class="grid-lines"></div>
+    <div class="diagonal-bar"></div><div class="diagonal-bar-2"></div>
+  </div>
+
+  <nav>
+    <div class="nav-logo">B<span>R</span>EATHE</div>
+    <div class="nav-right">
+      <div class="nav-date">June 27, 2026</div>
+      <a href="https://forms.gle/d3DSnKLX9cBcXXTM7" target="_blank" class="nav-register">Register</a>
+    </div>
+  </nav>
+
+  <div class="hero-body">
+    <div class="eyebrow">Teaching &amp; Wellbeing Online Forum</div>
+    <h1 class="hero-title">
+      BREATHE
+      <span class="accent-word">together</span>
+    </h1>
+    <p class="hero-tagline">
+      A <strong>one-day professional development event</strong> with international speakers — for educators who want to strengthen clarity and emotional wellbeing while keeping teaching deeply human.
+    </p>
+    <div class="hero-pills">
+      <div class="pill teal">🌍 International Speakers</div>
+      <div class="pill coral">💻 Online Event</div>
+      <div class="pill gold">🎬 Recordings Included</div>
+    </div>
+    <div class="hero-cta">
+      <a href="https://forms.gle/d3DSnKLX9cBcXXTM7" target="_blank" class="btn-primary">
+        Reserve Your Place <span class="btn-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<div class="about-grid">
+  <div class="about-text">
+    <p class="section-label">About the Forum</p>
+    <h2 class="section-title">Learn, reflect,<br/><em>and breathe.</em></h2>
+    <p>Through <strong>live sessions and Q&A with international speakers</strong>, we explore evidence-informed, classroom-ready approaches designed for real teaching contexts.</p>
+    <p>Gain practical strategies you can apply immediately — alongside space for reflection, renewed focus, and <strong>genuine professional connection</strong>.</p>
+    <p>Can't attend live? No problem. <strong>Recordings are available</strong> after the event so you can revisit everything at your own pace.</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Full Day Live</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">7+</div>
+      <div class="stat-label">Sessions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">🌍</div>
+      <div class="stat-label">Int'l Speakers</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Replay Access</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── SESSIONS ── -->
+<section class="sessions-section">
+  <div class="sessions-header">
+    <div>
+      <p class="section-label">Programme</p>
+      <h2 class="section-title">What we'll<br/><em>explore together</em></h2>
+    </div>
+    <div class="sessions-badge">
+      <div class="badge-num">7+</div>
+      <div class="badge-label">Sessions</div>
+    </div>
+  </div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-number">01</div>
+      <div class="session-name">AI in Education</div>
+      <span class="session-tag tag-tech">Technology</span>
+    </div>
+    <div class="session-card">
+      <div class="session-number">02</div>
+      <div class="session-name">Social &amp; Emotional Learning</div>
+      <span class="session-tag tag-well">Wellbeing</span>
+    </div>
+    <div class="session-card">
+      <div class="session-number">03</div>
+      <div class="session-name">Emotional Intelligence</div>
+      <span class="session-tag tag-well">Wellbeing</span>
+    </div>
+    <div class="session-card">
+      <div class="session-number">04</div>
+      <div class="session-name">Engaging the Students</div>
+      <span class="session-tag tag-eng">Engagement</span>
+    </div>
+    <div class="session-card">
+      <div class="session-number">05</div>
+      <div class="session-name">Teaching in Times of Uncertainty</div>
+      <span class="session-tag tag-res">Resilience</span>
+    </div>
+    <div class="session-card">
+      <div class="session-number">06</div>
+      <div class="session-name">Drama in the Classroom</div>
+      <span class="session-tag tag-art">Creative Arts</span>
+    </div>
+    <div class="session-card">
+      <div class="session-number">07</div>
+      <div class="session-name">Digital Storytelling</div>
+      <span class="session-tag tag-tech">Technology</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARTNERS ── -->
+<section class="partners-section">
+  <div class="partners-header">
+    <p class="section-label">Our Partners</p>
+    <h2 class="section-title">Proudly supported by</h2>
+    <p>This forum is brought to life through the generous collaboration of our valued partners.</p>
+  </div>
+  <div class="partners-row">
+
+    <!-- VOCCENT -->
+    <div class="partner-card">
+      <div class="partner-name">Voccent</div>
+      <div class="partner-role">Forum Partner</div>
+    </div>
+
+    <!-- ATC LANGUAGE SCHOOLS -->
+    <div class="partner-card">
+      <div class="partner-name">ATC Language Schools</div>
+      <div class="partner-role">Forum Partner</div>
+    </div>
+
+    <!-- EDYOUFEST -->
+    <div class="partner-card">
+      <div class="partner-name">EdYOUFest</div>
+      <div class="partner-role">Forum Partner</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── REGISTER ── -->
+<section class="register-section">
+  <div class="register-inner">
+    <div class="register-date">June 27</div>
+    <h2 class="register-headline">Join us <span>online</span><br/>this summer</h2>
+    <p class="register-sub">One day live, international speakers, a global community of educators ready to grow together — and recordings to keep forever.</p>
+    <a href="https://forms.gle/d3DSnKLX9cBcXXTM7" target="_blank" class="btn-register">
+      Register via Google Form →
+    </a>
+    <div class="register-note">
+      <span>1 Day Live + Recordings</span>
+      <span>7+ Sessions</span>
+      <span>International Speakers</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">B<span>R</span>EATHE</div>
+  <p>© 2026 BREATHE Teaching &amp; Wellbeing Forum · All rights reserved</p>
+</footer>
+
+</body>
+</html>

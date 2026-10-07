@@ -1,0 +1,458 @@
+---
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import Footer from '../components/Footer.astro';
+import { getProjects, getProjectMoments } from '../utils/content';
+
+const projects = await getProjects();
+
+const staticGalleryImages = [
+  { src: '/images/galery-slider/photo-1.jpg', alt: 'Project moment 1' },
+  { src: '/images/galery-slider/photo-2.jpg', alt: 'Project moment 2' },
+  { src: '/images/galery-slider/photo-3.jpg', alt: 'Project moment 3' },
+  { src: '/images/galery-slider/photo-4.jpg', alt: 'Project moment 4' },
+  { src: '/images/galery-slider/photo-5.jpg', alt: 'Project moment 5' },
+  { src: '/images/galery-slider/photo-6.jpg', alt: 'Project moment 6' },
+  { src: '/images/galery-slider/photo-7.jpg', alt: 'Project moment 7' },
+  { src: '/images/galery-slider/1.jpeg', alt: 'Project moment 8' },
+  { src: '/images/galery-slider/2.jpeg', alt: 'Project moment 9' },
+  { src: '/images/galery-slider/3.jpeg', alt: 'Project moment 10' },
+  { src: '/images/galery-slider/4.jpeg', alt: 'Project moment 11' },
+  { src: '/images/galery-slider/5.jpeg', alt: 'Project moment 12' },
+];
+
+const dbMoments = await getProjectMoments();
+
+const galleryImages = dbMoments.length > 0
+  ? dbMoments.map((m, i) => ({ src: m.image, alt: m.alt || `Project moment ${i + 1}` }))
+  : staticGalleryImages;
+
+const breadcrumb = [
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '/projects' }
+];
+
+const highlights = [
+  {
+    title: 'Smart City Institute – Uzhhorod National University',
+    description:
+      'As Director of Humanities I lead strategic initiatives that blend science, arts, wellbeing, and innovation across campus programs.',
+    linkLabel: 'Learn more',
+    linkHref: '#smart-city',
+    image: '/images/collaboration.jpg',
+    
+  },
+  {
+    title: 'International Partnerships',
+    description:
+      'Connecting institutions globally with the University of Central Lancashire, Oregon State University, Rotary, and Corvallis Sister Cities.',
+    detail:
+      'These collaborations strengthen exchange, joint projects, and long-term academic cooperation.',
+    image: '/images/projects_collaboration.jpg',
+  },
+];
+
+const resources = [
+  {
+    title: 'Curated Resources & Tools',
+    description:
+      'A growing collection of scientific articles, templates, activities, and practical tools for SEL, mindfulness, AI, and reflective practice.',
+  },
+  {
+    title: 'Featured Publications',
+    description: 'A list of recent publications grounded in emotion-centered pedagogy.',
+    linkLabel: 'The list of my recent publications',
+    linkHref: '/blog',
+  },
+];
+---
+
+<Layout title="Projects | Antonina Devitska" description="Ongoing projects and resources led by Antonina Devitska.">
+  <Header currentPage="projects" />
+
+  <main>
+    <PageHero 
+      title="Projects & Resources" 
+      breadcrumb={breadcrumb}
+    />
+
+    <section class="projects-content">
+      <div class="container">
+        <div class="project-grid">
+          {projects.map(item => (
+            <article class="project-card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            {item.detail && <p class="detail">{item.detail}</p>}
+            {item.image && (
+              <img src={item.image} alt={item.title} loading="lazy" />
+            )}
+            {item.linkLabel && (
+              <a class="text-link" href={item.linkHref || '#'}>{item.linkLabel}</a>
+            )}
+            </article>
+          ))}
+          {projects.length === 0 && (
+            <p class="no-projects">No projects yet.</p>
+          )}
+        </div>
+
+        <div class="gallery-section">
+          <div class="gallery-header">
+            <h2>Project Moments</h2>
+          </div>
+          
+          <div class="gallery-slider-container" id="gallery-container">
+            <div class="gallery-slider">
+              {galleryImages.map(img => (
+                <div class="gallery-item">
+                  <img src={img.src} alt={img.alt} loading="lazy" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="resources-section"> -->
+          <!-- <div class="resources-header">
+            <h2>Resources & Tools designed for educators & learners</h2>
+            <p>
+              A thoughtfully curated vault of science-backed guides, templates, activities, and reflective prompts that support SEL, mindfulness, and digital pedagogy.
+            </p>
+          </div>
+
+          <div class="resources-grid">
+            {resources.map(resource => (
+              <article class="resource-card">
+                <h3>{resource.title}</h3>
+                <p>{resource.description}</p>
+                {resource.linkLabel && (
+                  <a class="cta-link" href={resource.linkHref}>
+                    {resource.linkLabel}
+                  </a>
+                )}
+              </article>
+            ))}
+            <article class="resource-card highlighted">
+              <h3>Download & discuss</h3>
+              <p>Download resources and pair them with Instagram insights and live discussions for continued reflection.</p>
+              <div class="resource-actions">
+                <a class="cta-link" href="#download">→ Download resources</a>
+                <a class="cta-link" href="#instagram">→ Use alongside Instagram insights</a>
+              </div>
+            </article>
+          </div>
+        </div> -->
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .projects-content {
+    padding: 80px 0 120px;
+  }
+
+  .section-heading {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px;
+  }
+
+  .section-heading h2 {
+    font-size: 42px;
+    margin-bottom: 16px;
+  }
+
+  .section-heading p {
+    font-size: 20px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .project-card {
+    padding: 32px;
+    border-radius: 28px;
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .project-card h3 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .project-card p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .project-card .detail {
+    font-weight: 500;
+  }
+
+  .project-card img {
+    width: 100%;
+    border-radius: 18px;
+    margin-top: 18px;
+    object-fit: cover;
+    height: 280px;
+    border: 1px solid rgba(17, 82, 62, 0.08);
+    object-position: center;
+  }
+
+  .text-link {
+    margin-top: auto;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .gallery-section {
+    margin-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .gallery-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .gallery-header h2 {
+    font-size: 30px;
+    color: var(--color-text-black);
+  }
+
+  .gallery-slider-container {
+    overflow-x: auto;
+    padding: 0 20px 20px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE/Edge */
+    cursor: grab;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gallery-slider-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .gallery-slider {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+  }
+
+  .gallery-item {
+    flex: 0 0 400px;
+    height: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    scroll-snap-align: start;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .gallery-slider-container {
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding: 0 16px 16px;
+    }
+
+    .gallery-slider {
+      gap: 12px;
+      padding-left: 0;
+    }
+
+    .gallery-item {
+      flex: 0 0 calc(100vw - 80px);
+      height: 220px;
+    }
+  }
+
+  .resources-section {
+    margin-top: 80px;
+  }
+
+  .resources-header {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto 40px;
+  }
+
+  .resources-header h2 {
+    font-size: 36px;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .resource-card {
+    padding: 28px;
+    border-radius: 24px;
+    background: var(--color-white);
+    border: 1px solid rgba(20, 40, 30, 0.1);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .resource-card h3 {
+    margin: 0;
+    font-size: 22px;
+  }
+
+  .resource-card p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .resource-card.highlighted {
+    background: var(--color-bg-soft);
+    border: 1px solid rgba(58, 110, 87, 0.2);
+  }
+
+  .resource-actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cta-link {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .projects-content {
+      padding: 60px 0 80px;
+    }
+
+    .project-card,
+    .resource-card {
+      padding: 24px;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Projects gallery: auto-advance + pause on interaction
+  (function() {
+    function initGallery() {
+      const galleryContainer = document.getElementById('gallery-container');
+      if (!galleryContainer) return;
+
+      const galleryTrack = galleryContainer.querySelector('.gallery-slider');
+
+      const getStep = () => {
+        const firstItem = galleryContainer.querySelector('.gallery-item');
+        if (!firstItem) return 0;
+
+        const itemWidth = firstItem.getBoundingClientRect().width;
+        const gap = galleryTrack ? parseFloat(getComputedStyle(galleryTrack).gap || '0') : 0;
+        return itemWidth + gap;
+      };
+
+      let timer = null;
+      let paused = false;
+
+      const stop = () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      };
+
+      const start = () => {
+        stop();
+        timer = setInterval(() => {
+          if (paused || document.hidden) return;
+
+          const step = getStep();
+          if (!step) return;
+
+          const max = galleryContainer.scrollWidth - galleryContainer.clientWidth;
+          const next = galleryContainer.scrollLeft + step;
+
+          if (next >= max - 2) {
+            galleryContainer.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            galleryContainer.scrollTo({ left: next, behavior: 'smooth' });
+          }
+        }, 3500);
+      };
+
+      const pauseFor = (ms) => {
+        paused = true;
+        stop();
+        setTimeout(() => {
+          paused = false;
+          start();
+        }, ms);
+      };
+
+      galleryContainer.addEventListener('pointerenter', () => { paused = true; });
+      galleryContainer.addEventListener('pointerleave', () => { paused = false; });
+      galleryContainer.addEventListener('pointerdown', () => pauseFor(2500));
+      galleryContainer.addEventListener('touchstart', () => pauseFor(2500), { passive: true });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop();
+        else start();
+      });
+
+      start();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initGallery);
+    } else {
+      initGallery();
+    }
+  })();
+</script>

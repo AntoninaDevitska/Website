@@ -1,0 +1,183 @@
+---
+import ServiceCard from './ServiceCard.astro';
+
+const services = [
+  {
+    title: "Educational Program Design & Online Courses",
+    description: "I create and deliver transformative learning programs that combine wellbeing, innovation, and pedagogy through online, blended, and self-paced formats.",
+    image: "/images/service-1.png",
+    imagePosition: "top" as const,
+    href: "/courses/featured-courses"
+  },
+  {
+    title: "Professional Speaking & Training",
+    description: "I deliver inspiring talks, webinars, and trainings that foster teacher wellbeing, emotional intelligence, and mindful leadership.",
+    image: "/images/service-2.png",
+    imagePosition: "top" as const,
+    href: "/courses/speaking-collaborations"
+  },
+  {
+    title: "Creative Writing & Reflective Practice",
+    description: "I facilitate writing experiences that promote self-awareness, wellbeing, and personal growth through reflection and creativity.",
+    image: "/images/service-3.png",
+    imagePosition: "top" as const,
+    href: "/courses/other-courses-academic-programs"
+  },
+  {
+    title: "Consulting & Partnerships",
+    description: "I support institutions and organizations in developing wellbeing-centered educational strategies and international collaboration projects.",
+    image: "/images/service-4.png",
+    imagePosition: "top" as const,
+    href: "/courses/mentorship-consulting"
+  },
+  {
+    title: "Retreats, Summer Schools & Experiential Learning",
+    description: "I design immersive retreats and learning events that restore balance, nurture creativity, and strengthen emotional resilience.",
+    image: "/images/service-5.png",
+    imagePosition: "top" as const,
+    href: "/courses/teacher-training-workshops"
+  }
+];
+---
+
+<section class="services-section">
+  <div class="container">
+    <div class="services-header">
+      <h2 class="services-title">Explore Our Services</h2>
+      <a href="/courses" class="btn btn-primary btn-small view-all-btn view-all-desktop">
+        View All
+      </a>
+    </div>
+    
+    <div class="services-grid">
+      {services.slice(0, 2).map((service, index) => (
+        <div class="service-item">
+          <ServiceCard {...service} />
+        </div>
+      ))}
+    </div>
+    
+    <div class="services-grid services-grid-bottom">
+      {services.slice(2, 4).map((service, index) => (
+        <div class="service-item">
+          <ServiceCard {...service} />
+        </div>
+      ))}
+    </div>
+    
+    <div class="services-single">
+      <ServiceCard {...services[4]} />
+    </div>
+    
+    <a href="/courses" class="btn btn-primary btn-small view-all-btn view-all-mobile">
+      View All
+    </a>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: 60px 0 100px;
+  }
+  
+  .services-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+  }
+  
+  .services-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 46px;
+    line-height: 1.14;
+    color: var(--color-text-black);
+  }
+  
+  .view-all-btn {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 14px 22px;
+  }
+  
+  .view-all-mobile {
+    display: none;
+  }
+  
+  .view-all-desktop {
+    display: block;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  
+  .services-grid-bottom {
+    margin-bottom: 48px;
+  }
+  
+  .services-single {
+    max-width: 510px;
+    margin: 0 auto;
+  }
+  
+  .service-item {
+    height: 100%;
+  }
+  
+  @media (max-width: 1270px) {
+    .services-title {
+      font-size: 36px;
+    }
+  }
+  
+  @media (max-width: 968px) {
+    .services-grid {
+      gap: 32px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .services-section {
+      padding: 10px 0;
+    }
+    
+    .services-header {
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .view-all-desktop {
+      display: none;
+    }
+    
+    .view-all-mobile {
+      display: block;
+      margin: 24px auto 0;
+      text-align: center;
+    }
+    
+    .services-title {
+      font-size: 28px;
+    }
+    
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .services-single {
+      max-width: 100%;
+      margin-bottom: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,16 @@
+<svg width="96" height="20" viewBox="0 0 96 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ratingGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b6d4b" />
+      <stop offset="100%" stop-color="#3dbb8c" />
+    </linearGradient>
+  </defs>
+  <g opacity="0.85">
+    <polygon points="10,0 13,7 20,8 14,13 15,20 10,16 5,20 6,13 0,8 7,7" fill="url(#ratingGradient)" />
+    <polygon points="30,0 33,7 40,8 34,13 35,20 30,16 25,20 26,13 20,8 27,7" fill="url(#ratingGradient)" />
+    <polygon points="50,0 53,7 60,8 54,13 55,20 50,16 45,20 46,13 40,8 47,7" fill="url(#ratingGradient)" />
+    <polygon points="70,0 73,7 80,8 74,13 75,20 70,16 65,20 66,13 60,8 67,7" fill="url(#ratingGradient)" />
+    <polygon points="90,0 93,7 100,8 94,13 95,20 90,16 85,20 86,13 80,8 87,7" fill="url(#ratingGradient)" />
+  </g>
+</svg>
+

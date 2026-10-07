@@ -1,0 +1,170 @@
+---
+interface Props {
+  title: string;
+  category: string;
+  date: string;
+  author: string;
+  image: string;
+  href?: string;
+}
+
+const { title, category, date, author, image, href } = Astro.props;
+const Element = href ? 'a' : 'div';
+---
+
+<article class="blog-card">
+  <Element href={href} class="blog-card-container">
+    
+    <div class="blog-image">
+      <img src={image} alt={title} />
+    </div>
+
+    <div class="blog-content">
+      <h3 class="blog-title">{title}</h3>
+      
+      <div class="blog-footer-row">
+        <div class="blog-meta">
+          <div class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span class="truncate">{author}</span>
+          </div>
+
+          <div class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>{date}</span>
+          </div>
+        </div>
+
+        {href && (
+          <div class="read-button">
+            Read →
+          </div>
+        )}
+      </div>
+    </div>
+    
+  </Element>
+</article>
+
+<style>
+  .blog-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .blog-card-container {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    min-height: 220px;
+    align-items: stretch;
+  }
+
+  .blog-image {
+    position: relative;
+    width: 280px;
+    flex-shrink: 0;
+    height: 220px; /* Prevent image intrinsic height from expanding card/section */
+  }
+
+  .blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .blog-content {
+    flex: 1;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    min-width: 0; 
+  }
+
+  .blog-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    color: #1a2b4b;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-footer-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .blog-meta {
+    display: flex;
+    flex-direction: column; 
+    gap: 6px;
+    min-width: 0; 
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #888;
+    min-width: 0;
+  }
+
+  .meta-item svg {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+  }
+
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .read-button {
+    background-color: #8e7db3;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0; 
+  }
+
+
+  @media (max-width: 768px) {
+    .blog-card-container {
+      flex-direction: column;
+    }
+    .blog-image {
+      width: 100%;
+      height: 200px;
+    }
+    .blog-footer-row {
+      align-items: center;
+    }
+  }
+</style>

@@ -1,0 +1,155 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  href?: string;
+  imagePosition?: 'top' | 'bottom';
+  variant?: 'default' | 'overlay';
+}
+
+const { 
+  title, 
+  description, 
+  image, 
+  href = '#',
+  imagePosition = 'top',
+  variant = 'default'
+} = Astro.props;
+---
+
+<a href={href} class="service-card-link">
+  <article class:list={['service-card', `image-${imagePosition}`, variant]}>
+    <div class="service-image">
+      <img src={image} alt={title} />
+    </div>
+    <div class="service-content">
+      <h3 class="service-title">{title}</h3>
+      <p class="service-description">{description}</p>
+    </div>
+  </article>
+</a>
+
+<style>
+  .service-card-link {
+    text-decoration: none;
+    display: block;
+    height: 100%;
+  }
+
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-green-card);
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .service-card-link:hover .service-card {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(141, 119, 171, 0.15);
+    border-color: rgba(141, 119, 171, 0.2);
+  }
+  
+  .service-card.image-bottom {
+    flex-direction: column-reverse;
+  }
+  
+  .service-image {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+  }
+  
+  .service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  
+  .service-card:hover .service-image img {
+    transform: scale(1.05);
+  }
+  
+  .service-content {
+    padding: 48px 32px 46px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+  }
+  
+  .service-title {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.34;
+    color: var(--color-text-black);
+  }
+  
+  .service-description {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--color-text-black);
+    max-width: 350px;
+  }
+  
+  .service-card.overlay {
+    position: relative;
+  }
+  
+  .service-card.overlay .service-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+  }
+  
+  .service-card.overlay .service-content {
+    position: relative;
+    z-index: 1;
+    background: var(--color-green-card);
+    margin: auto 0 0;
+  }
+  
+  @media (max-width: 768px) {
+    .service-image {
+      height: 220px;
+    }
+    
+    .service-content {
+      padding: 32px 24px;
+    }
+    
+    .service-title {
+      font-size: 24px;
+    }
+    
+    .service-description {
+      font-size: 14px;
+    }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+

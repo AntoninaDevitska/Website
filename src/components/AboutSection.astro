@@ -1,0 +1,145 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
+const {
+  title = "About Me and What Inspires My Work",
+  description = "Passionate educator, facilitator and mentor with 19 years of experience administering education and classroom procedures both internationally and in collaboration with Uzhhorod National University departments.",
+  buttonText = "Read More ➔",
+  buttonLink = "/about"
+} = Astro.props;
+---
+
+<section class="about-section">
+  <div class="container">
+    <div class="about-card">
+      <div class="about-image">
+        <img src="/images/about-portrait.png" alt="Antonina Devitska portrait" />
+      </div>
+      <div class="about-content">
+        <h2 class="about-title">{title}</h2>
+        <p class="about-description">{description}</p>
+        <a href={buttonLink} class="btn btn-primary about-btn">
+          {buttonText}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    padding: 80px 0;
+  }
+  
+  .about-card {
+    display: flex;
+    background: var(--color-green-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 0.5px solid #BC75F6;
+  }
+  
+  .about-image {
+    flex-shrink: 0;
+    width: 480px;
+  }
+  
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px 0 0 15px;
+  }
+  
+  .about-content {
+    flex: 1;
+    padding: 65px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .about-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1.14;
+    color: var(--color-primary);
+    margin-bottom: 40px;
+  }
+  
+  .about-description {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.3;
+    color: var(--color-text-black);
+    margin-bottom: 50px;
+  }
+  
+  .about-btn {
+    align-self: flex-start;
+    font-size: 22px;
+    padding: 10px 43px;
+  }
+  
+  @media (max-width: 1100px) {
+    .about-image {
+      width: 400px;
+    }
+    
+    .about-image img {
+      border-radius: 15px 15px 0 0;
+      object-position: center;
+    }
+    
+    .about-title {
+      font-size: 36px;
+    }
+    
+    .about-description {
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 868px) {
+    .about-card {
+      flex-direction: column;
+    }
+    
+    .about-image {
+      width: 100%;
+      height: 320px;
+    }
+    
+    .about-image img {
+      border-radius: 15px 15px 0 0;
+      object-position: center;
+    }
+    
+    .about-content {
+      padding: 36px 28px;
+    }
+    
+    .about-title {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+    
+    .about-description {
+      font-size: 17px;
+      margin-bottom: 28px;
+    }
+    
+    .about-btn {
+      font-size: 17px;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

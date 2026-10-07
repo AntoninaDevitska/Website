@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import PageHero from '../../components/PageHero.astro';
+import BlogArticleCard from '../../components/BlogArticleCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import Footer from '../../components/Footer.astro';
+import type { GetStaticPaths, Page } from 'astro';
+import { getArticles, type Article } from '../../utils/content';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const articles = await getArticles();
+  // Page 1 is /blog, then /blog/2, /blog/3, ...
+  return paginate(articles, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: Page<Article> };
+const articles = page.data;
+const currentPage = page.currentPage;
+const totalPages = page.lastPage;
+
+const breadcrumb = [
+  { label: 'Home', href: '/' },
+  { label: 'Academia', href: '/blog' }
+];
+---
+
+<Layout title="Academia | Antonina Devitska" description="Explore articles and stories on education, wellbeing, and personal growth.">
+  <Header currentPage="blog" />
+  
+  <main>
+    <PageHero 
+      title="Welcome to Academia" 
+      breadcrumb={breadcrumb}
+    />
+    
+    <section class="blog-section">
+      <div class="container">
+        <div class="blog-header">
+          <h2 class="section-title">Articles, Reflections & Insights</h2>
+          <p class="section-description">
+            Explore my collection of articles and stories, where I share insights, experiences, and reflections from my work and learning journey. Each piece is written to inspire, inform, and spark new perspectives for your own growth.
+          </p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="articles-grid">
+          {articles.map(article => (
+            <BlogArticleCard {...article} />
+          ))}
+        </div>
+        
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .blog-section {
+    padding: 60px 0 100px;
+  }
+  
+  .blog-header {
+    margin-bottom: 40px;
+  }
+  
+  .section-title {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.25;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+  }
+  
+  .section-description {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.85;
+    color: #454545;
+    max-width: 1131px;
+  }
+  
+  .divider {
+    height: 1px;
+    background: var(--color-gray);
+    margin-bottom: 40px;
+  }
+  
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 24px;
+  }
+  
+  @media (max-width: 1100px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .blog-section {
+      padding: 40px 0 80px;
+    }
+    
+    .section-title {
+      font-size: 26px;
+      line-height: 1.22;
+    }
+    
+    .section-description {
+      font-size: 14px;
+    }
+  }
+</style>

@@ -1,0 +1,196 @@
+# Pages CMS configuration — https://pagescms.org/docs/configuration/
+# Editors sign in at https://app.pagescms.org. Every save is a git commit to
+# this repository; the "Deploy to GitHub Pages" workflow then rebuilds the site.
+#
+# Images are stored in src/assets/uploads/ and referenced as "/uploads/...";
+# Astro optimizes them at build time (see src/utils/images.ts).
+
+media:
+  input: src/assets/uploads
+  output: /uploads
+  categories: [image]
+  rename: safe
+
+settings:
+  commit:
+    identity: user
+
+content:
+  - name: articles
+    label: Academia (articles)
+    type: collection
+    path: src/content/articles
+    format: yaml-frontmatter
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, date, category]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+      - name: author
+        label: Authors
+        type: string
+        description: Leave empty to show "Antonina Devitska".
+      - name: category
+        label: Category
+        type: string
+      - name: excerpt
+        label: Excerpt
+        type: text
+        description: Short summary for cards and search engines. Leave empty to use the start of the article.
+      - name: image
+        label: Cover image
+        type: image
+        options:
+          path: src/assets/uploads/articles
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+      - name: legacy_id
+        type: string
+        hidden: true
+      - name: body
+        label: Article
+        type: rich-text
+        options:
+          format: markdown
+          path: src/assets/uploads/articles
+
+  - name: services
+    label: Services & courses
+    type: file
+    path: src/content/services.yaml
+    format: yaml
+    list: true
+    fields:
+      - name: name
+        label: Category name
+        type: string
+        required: true
+      - name: slug
+        label: URL slug
+        type: string
+        required: true
+        description: "Page address: devitska.com/courses/<slug>. Lowercase letters, numbers and dashes. Changing it breaks existing links."
+        pattern:
+          regex: "^[a-z0-9]+(-[a-z0-9]+)*$"
+          message: Use lowercase letters, numbers and dashes only.
+      - name: legacy_id
+        type: string
+        hidden: true
+      - name: courses
+        label: Courses
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+          - name: lessons
+            label: Lessons
+            type: string
+            description: e.g. "10 lessons"
+          - name: duration
+            label: Duration
+            type: string
+            description: e.g. "4 weeks"
+          - name: enroll_link
+            label: Enroll / request link
+            type: string
+          - name: tags
+            label: Audience tags
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: image
+            options:
+              path: src/assets/uploads/courses
+
+  - name: certificates
+    label: Certificates
+    type: file
+    path: src/content/certificates.yaml
+    format: yaml
+    list: true
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: issuer
+        label: Issuer
+        type: string
+      - name: year
+        label: Year
+        type: string
+      - name: image
+        label: Certificate image
+        type: image
+        options:
+          path: src/assets/uploads/certificates
+
+  - name: projects
+    label: Projects
+    type: file
+    path: src/content/projects.yaml
+    format: yaml
+    list: true
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+      - name: detail
+        label: Extra detail
+        type: text
+      - name: link_label
+        label: Link text
+        type: string
+      - name: link_href
+        label: Link URL
+        type: string
+      - name: image
+        label: Image
+        type: image
+        options:
+          path: src/assets/uploads/projects
+
+  - name: project-moments
+    label: Project moments (gallery)
+    type: file
+    path: src/content/project-moments.yaml
+    format: yaml
+    list: true
+    fields:
+      - name: image
+        label: Photo
+        type: image
+        required: true
+        options:
+          path: src/assets/uploads/moments
+      - name: alt
+        label: Description (for screen readers)
+        type: string

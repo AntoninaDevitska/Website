@@ -1,0 +1,174 @@
+---
+import BlogCard from './BlogCard.astro';
+import { getArticles } from '../utils/content';
+
+interface BlogPost {
+  title: string;
+  category: string;
+  date: string;
+  author: string;
+  image: string;
+  href?: string;
+}
+
+const dbPosts = await getArticles();
+
+const displayPosts = dbPosts.length > 0 
+  ? dbPosts.slice(0, 4).map(post => ({
+      title: post.title,
+      category: post.category || 'Insight',
+      date: post.date,
+      author: post.author,
+      image: post.image,
+      href: post.href
+    }))
+  : [
+      {
+        title: "Emotional fitness and the truth about feelings",
+        category: "Insight",
+        date: "November 9, 2025",
+        author: "Antonina Devitska",
+        image: "/images/blog-1.png",
+        href: "/blog/emotional-fitness"
+      },
+    ];
+---
+
+<section class="blog-section">
+  <div class="container">
+    <div class="blog-header">
+      <h2 class="blog-section-title">
+        Exploring Education & Wellbeing:<br />
+        Latest Articles
+      </h2>
+      <a href="/blog" class="btn btn-primary btn-small view-all-btn view-all-desktop">
+        View All
+      </a>
+    </div>
+    
+    <div class="blog-grid">
+      {displayPosts.map(post => (
+        <BlogCard {...post} />
+      ))}
+    </div>
+
+    <a href="/blog" class="btn btn-primary btn-small view-all-btn view-all-mobile">
+      View All
+    </a>
+  </div>
+</section>
+
+<style>
+  .blog-section {
+    padding: 80px 0;
+  }
+  
+  .blog-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .blog-section-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 46px;
+    line-height: 1.14;
+    color: var(--color-text-black);
+  }
+  
+  .view-all-btn {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 14px 22px;
+  }
+  
+  .view-all-mobile {
+    display: none;
+  }
+  
+  .view-all-desktop {
+    display: block;
+  }
+  
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  
+  @media (max-width: 1270px) {
+    .blog-section-title {
+      font-size: 40px;
+    }
+    .blog-grid {
+      gap: 24px;
+    }
+  }
+  
+  @media (max-width: 1100px) {
+    .blog-section-title {
+      font-size: 36px;
+      text-align: left;
+    }
+  }
+  
+  @media (max-width: 968px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .blog-section {
+      padding: 60px 0;
+    }
+    
+    .blog-header {
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .blog-section-title {
+      font-size: 28px;
+      text-align: center;
+    }
+    
+    .view-all-desktop {
+      display: none;
+    }
+    
+    .view-all-mobile {
+      display: block;
+      margin: 24px auto 0;
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .blog-section {
+      padding: 50px 0;
+    }
+    
+    .blog-section-title {
+      font-size: 24px;
+      text-align: center;
+    }
+    
+    .blog-grid {
+      gap: 20px;
+    }
+    
+    .view-all-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>

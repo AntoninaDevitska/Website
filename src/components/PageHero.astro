@@ -1,0 +1,113 @@
+---
+interface Props {
+  title: string;
+  breadcrumb?: { label: string; href: string }[];
+}
+
+const { title, breadcrumb = [] } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="container">
+    <h1 class="page-title">{title}</h1>
+    {breadcrumb.length > 0 && (
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        {breadcrumb.map((item, index) => (
+          <>
+            {index > 0 && <span class="separator">›</span>}
+            {index === breadcrumb.length - 1 ? (
+              <span class="current">{item.label}</span>
+            ) : (
+              <a href={item.href}>{item.label}</a>
+            )}
+          </>
+        ))}
+      </nav>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    background: var(--gradient-banner);
+    padding: 28px 0 28px;
+    margin-top: 110px;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+  
+  .page-title {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.25;
+    color: var(--color-white);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--color-white);
+    text-align: center;
+  }
+  
+  .breadcrumb a {
+    color: var(--color-white);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+  
+  .breadcrumb a:hover {
+    opacity: 1;
+  }
+  
+  .breadcrumb .separator {
+    opacity: 0.6;
+  }
+  
+  .breadcrumb .current {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .page-hero {
+      padding: 32px 0 24px;
+      margin-top: 80px;
+    }
+    
+    .page-title {
+      font-size: 24px;
+      padding: 0 10px;
+    }
+    
+    .breadcrumb {
+      font-size: 14px;
+      padding: 0 15px;
+      line-height: 1.4;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page-hero {
+      padding: 24px 0 20px;
+    }
+
+    .page-title {
+      font-size: 20px;
+    }
+
+    .breadcrumb {
+      font-size: 13px;
+      gap: 4px 8px;
+    }
+  }
+</style>

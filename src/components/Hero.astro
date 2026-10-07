@@ -1,0 +1,361 @@
+---
+
+---
+
+<section id="hero" class="hero">
+  <div class="container hero-container">
+    <div class="hero-content">
+      <div class="hero-heading">
+        <h1>
+          <span class="line-1">Human-Centered <span class="teaching-word">Teaching<svg class="heading-underline" width="140" height="10" viewBox="0 0 140 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 8C30 2 110 -2 138 8" stroke="#BAD8B6" stroke-width="4" stroke-linecap="round"/>
+            </svg></span></span>
+          <span class="line-2">for a <span class="teaching-word">Changing<svg class="heading-underline" width="140" height="10" viewBox="0 0 140 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 8C30 2 110 -2 138 8" stroke="#BAD8B6" stroke-width="4" stroke-linecap="round"/>
+            </svg></span> World</span>
+        </h1>
+      </div>
+      
+      <p class="hero-description">
+        I am an educator, mentor, and the founder of <span class="devitska-education">Devitska Education</span>, which designs human-centered learning experiences at the intersection of emotional intelligence, digital innovation, and teaching in times of uncertainty.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="/courses" class="btn btn-primary hero-btn">
+          Explore our work
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeiIW_2tnlXI0RqB2cDwXlK5DhdWNfn38TvC4PKiVuWaHkxZw/viewform" class="btn btn-primary hero-btn">
+          Invite me to speak
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-circle-outline"></div>
+      <div class="hero-circle-gradient"></div>
+      <div class="hero-image-wrapper">
+        <img src="/images/hero-portrait.png" alt="Antonina Devitska" class="hero-image" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    padding: 160px 0 80px; 
+    overflow: hidden;
+  }
+
+  .devitska-education {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-primary);
+  }
+
+  @media (min-width: 1600px) {
+    .hero {
+      padding: 130px 0 80px; 
+    }
+  }
+  
+  .hero-container {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    gap: clamp(40px, 8vw, 100px); 
+    padding: 0 60px; 
+    margin: 0 auto;
+    max-width: 1440px; 
+  }
+
+  .hero-content {
+    max-width: 658px;
+    flex: 0 1 auto; 
+  }
+
+  .hero-visual {
+    position: relative;
+    flex: 0 0 auto;
+    width: clamp(400px, 35vw, 540px); 
+    height: clamp(400px, 35vw, 540px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-circle-outline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--color-primary);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+  
+  .hero-circle-gradient {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background: var(--gradient-hero);
+    opacity: 0.8;
+  }
+  
+  .hero-image-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    z-index: 2;
+    border-radius: 50%;
+    overflow: hidden;
+    /* Fix for browser clipping issues */
+    transform: translate(-50%, -50%) translateZ(0);
+    isolation: isolate;
+  }
+
+  .hero-heading {
+    margin-bottom: 40px;
+  }
+
+  .hero-heading h1 {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: clamp(44px, 3.2vw, 50px); 
+    line-height: 1.2;
+    color: var(--color-text-dark);
+  }
+
+  .hero-heading .line-1 {
+    display: block;
+  }
+
+  .hero-heading .line-2 {
+    display: block;
+  }
+
+  .teaching-word {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+  }
+
+  .heading-underline {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 140px;
+    height: 10px;
+    z-index: -1;
+  }
+  
+  .hero-description {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: clamp(18px, 1.5vw, 22px); 
+    line-height: 1.4;
+    color: var(--color-text-black);
+    margin-bottom: 50px;
+    max-width: 650px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+  }
+  
+  .hero-btn {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 12px 22px;
+    font-size: 20px;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  @media (max-width: 1270px) and (min-width: 969px) {
+    .hero {
+      min-height: 100vh; 
+      display: flex;
+      align-items: center;
+      padding: 140px 0 60px; 
+    }
+    
+    .hero-container {
+      gap: 60px; 
+      padding: 0 60px;
+    }
+    
+    .hero-visual {
+      width: clamp(420px, 38vw, 480px); 
+      height: clamp(420px, 38vw, 480px);
+    }
+    
+    .hero-content {
+      max-width: 540px; 
+      padding-top: 0;
+    }
+    
+    .hero-heading h1 {
+      font-size: 46px; 
+    }
+    
+    .hero-description {
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+
+    .hero-btn {
+      font-size: 18px;
+      padding: 12px 24px;
+    }
+  }
+  
+  @media (max-width: 968px) {
+    .hero {
+      min-height: auto;
+      padding: 104px 0 44px;
+    }
+    
+    .hero-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 18px;
+      padding: 0;
+    }
+
+    .hero .container {
+      padding: 0 16px;
+    }
+
+    .hero-visual {
+      order: -1; 
+      width: 320px;
+      height: 320px;
+      margin: 0 auto;
+    }
+    
+    .hero-circle-outline {
+      width: 290px;
+      height: 290px;
+    }
+    
+    .hero-circle-gradient,
+    .hero-image-wrapper {
+      width: 260px;
+      height: 260px;
+    }
+    
+    .hero-content {
+      max-width: 100%;
+      padding: 0;
+    }
+    
+    .hero-heading {
+      margin-bottom: 16px;
+    }
+    
+    .hero-heading h1 {
+      font-size: 34px;
+      line-height: 1.12;
+    }
+    
+    .heading-underline {
+      display: none;
+    }
+    
+    .hero-description {
+      font-size: 17px;
+      max-width: none;
+      margin: 0 auto 20px;
+      line-height: 1.5;
+    }
+
+    .hero-actions {
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .hero-btn {
+      font-size: 16px;
+      padding: 11px 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero {
+      padding: 92px 0 32px;
+    }
+
+    .hero .container {
+      padding: 0 12px;
+    }
+
+    .hero-visual {
+      width: 288px;
+      height: 288px;
+    }
+    
+    .hero-circle-outline {
+      width: 260px;
+      height: 260px;
+    }
+    
+    .hero-circle-gradient,
+    .hero-image-wrapper {
+      width: 232px;
+      height: 232px;
+    }
+    
+    .hero-content {
+      padding: 0;
+    }
+
+    .hero-heading h1 {
+      font-size: 26px;
+      line-height: 1.1;
+    }
+    
+    .hero-description {
+      font-size: 15px;
+      max-width: none;
+      margin-bottom: 16px;
+    }
+    
+    .hero-btn {
+      font-size: 16px;
+      padding: 11px 14px;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-btn {
+      width: auto;
+      /* Keep buttons compact on phones (not full-width) but consistent */
+      min-width: 240px;
+    }
+  }
+</style>

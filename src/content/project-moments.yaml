@@ -1,0 +1,25 @@
+# Gallery on the Projects page. Order here = order on the site.
+- image: /uploads/moments/moment-01.jpg
+  alt: "1"
+- image: /uploads/moments/moment-02.jpg
+  alt: "2"
+- image: /uploads/moments/moment-03.jpg
+  alt: "3"
+- image: /uploads/moments/moment-04.jpg
+  alt: "4"
+- image: /uploads/moments/moment-05.jpg
+  alt: "5"
+- image: /uploads/moments/moment-06.jpg
+  alt: photo-1
+- image: /uploads/moments/moment-07.jpg
+  alt: photo-2
+- image: /uploads/moments/moment-08.jpg
+  alt: photo-3
+- image: /uploads/moments/moment-09.jpg
+  alt: photo-4
+- image: /uploads/moments/moment-10.jpg
+  alt: photo-5
+- image: /uploads/moments/moment-11.jpg
+  alt: photo-6
+- image: /uploads/moments/moment-12.jpg
+  alt: photo-7

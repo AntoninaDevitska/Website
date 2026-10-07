@@ -1,0 +1,467 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Contact | Antonina Devitska" description="Get in touch with Antonina Devitska.">
+  <Header currentPage="contact" />
+
+  <main class="contact-page">
+    <section class="contact-hero">
+      <div class="container">
+        <h1 class="hero-title">Let's Connect</h1>
+        <p class="subtitle">
+          Want to collaborate, invite me to speak, or ask a question? Send a message and I'll get back to you soon.
+        </p>
+      </div>
+    </section>
+
+    <section class="contact-content">
+      <div class="container">
+        <div class="grid">
+          <div class="info-sidebar">
+            <div class="info-card">
+              <div class="icon-wrapper">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="info-content">
+                <h3>Email</h3>
+                <a href="mailto:devitska.education@gmail.com" class="contact-link">devitska.education@gmail.com</a>
+              </div>
+            </div>
+
+
+            <div class="info-card">
+              <div class="icon-wrapper">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.3503 17.623 3.8507 18.1676 4.55231C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="info-content">
+                <h3>Follow Me</h3>
+                <div class="social-links">
+                   <a
+              href="https://www.instagram.com/devitska.education?igsh=dTRsZXZlYjJmNHhu&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-btn"
+              aria-label="Instagram"
+            >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.013 3.584-.07 4.85c-.054 1.17-.248 1.805-.413 2.227-.217.562-.477.96-.896 1.382-.419.419-.818.679-1.381.896-.422.164-1.057.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.584-.013-4.85-.07c-1.17-.054-1.805-.248-2.227-.413-.562-.217-.96-.477-1.382-.896-.419-.419-.679-.818-.896-1.381-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.013-3.584.07-4.85c.054-1.17.248-1.805.413-2.227.217-.562.477-.96.896-1.382.419-.419.818-.679 1.381-.896.422-.164 1.057-.36 2.227-.413 1.266-.057 1.646-.07 4.85-.07zM12 0C8.741 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053 0.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.337 1.078 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.078-1.337 1.384-2.126c.296-.765.499-1.636.558-2.913.058-1.28.072-1.687.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.337-1.078-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="currentColor"/>
+            </svg>
+            </a>
+                  <a href="https://www.facebook.com/HorvatErikAntonina?mibextid=LQQJ4d&rdid=rQsXyuheqZRclwvF&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18uuFgH722%2F%3Fmibextid%3DLQQJ4d%23" target="_blank" rel="noopener" aria-label="Facebook" class="social-btn">
+                    <svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6.39703 17.9978V9.80078H9.16203L9.57303 6.59178H6.39703V4.54778C6.39703 3.62178 6.65503 2.98778 7.98403 2.98778H9.66803V0.126781C8.84903 0.0387813 8.02503 -0.00421875 7.20103 0.000781254C4.75703 0.000781254 3.07903 1.49178 3.07903 4.23078V6.58578H0.332031V9.79478H3.08503V17.9978H6.39703Z" fill="currentColor"/>
+                    </svg>
+                  </a>
+                  <a href="https://www.linkedin.com/in/antonina-devitska-199017266/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-btn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.58065 16H0.264516V5.31742H3.58065V16ZM1.92097 3.86H1.9C0.754839 3.86 0 3.07097 0 2.08387C0 1.07613 0.776774 0.30968 1.94258 0.30968C3.10839 0.30968 3.84129 1.07613 3.86323 2.08387C3.86323 3.07097 3.10839 3.86 1.92097 3.86ZM16 16H12.6839V10.3277C12.6839 8.99355 12.2097 8.08387 11.0006 8.08387C10.0684 8.08387 9.51226 8.7029 9.27097 9.30129C9.18581 9.50645 9.16387 9.78839 9.16387 10.0716V16H5.84774C5.84774 16 5.89161 6.65548 5.84774 5.31742H9.16387V6.72516C9.60258 6.05935 10.38 5.11097 12.1877 5.11097C14.4335 5.11097 16 6.47742 16 9.91355V16Z" fill="currentColor"/>
+                    </svg>
+                  </a>
+                  <a href="https://scholar.google.com/citations?user=W-nlvG0AAAAJ&hl" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Google Scholar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.547 11.249 14.967 9.5 12 9.5s-5.547 1.749-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z" fill="currentColor"/>
+                    </svg>
+                  </a>
+                  <a href="https://www.researchgate.net/profile/Antonina-Devitska?ev=hdr_xprf" target="_blank" rel="noopener" aria-label="ResearchGate" class="social-btn rg-btn">
+                    <span class="rg-text">R<sup>G</sup></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+                        <div class="info-card">
+              <div class="icon-wrapper">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="info-content">
+                <h3>Location</h3>
+                <p class="contact-link">Uzhhorod, Ukraine</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="google-form-card">
+              <div class="form-badge" aria-hidden="true">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 7.5C4 6.67157 4.67157 6 5.5 6H18.5C19.3284 6 20 6.67157 20 7.5V16.5C20 17.3284 19.3284 18 18.5 18H5.5C4.67157 18 4 17.3284 4 16.5V7.5Z"
+                        stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M5 8L12 13L19 8"
+                        stroke="currentColor" stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+                </svg>
+              </div>
+          
+              <h2 class="card-title">Send a Message</h2>
+              <p class="card-subtitle">
+                I'd love to hear from you! Click the button below to fill out the contact form and I'll get back to you as soon as possible.
+              </p>
+              <a 
+                href="https://forms.gle/gdTY11J91G29FVPF6" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-google-form"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Open Contact Form
+              </a>
+              <p class="hint-text">
+                The form opens in a new tab. I typically respond within 24-48 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .contact-page {
+    padding-top: 120px; 
+  }
+
+  .contact-hero {
+    padding: 40px 0 32px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.1;
+    color: var(--color-text-black);
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    max-width: 60ch;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+  }
+
+  .contact-content {
+    padding: 32px 0 80px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .info-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .info-card {
+    background: var(--color-white);
+    border: 1px solid rgba(141, 119, 171, 0.2);
+    border-radius: 16px;
+    padding: 34px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(141, 119, 171, 0.12);
+  }
+
+  .icon-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(
+    135deg,
+    #8e77ab 0%,   
+    #9c89ab 40%,   
+    #c5e2a4 100%  
+  );
+  border-radius: 12px;
+  color: var(--color-white);
+}
+
+
+
+
+
+  .info-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .info-card h3 {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-text-black);
+    margin-bottom: 4px;
+  }
+
+  .contact-link {
+    display: block;
+    font-size: 15px;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .contact-link:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--color-white);
+    border-radius: 50%;
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .social-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .rg-btn {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .rg-text {
+    font-size: 12px;
+    color: var(--color-primary);
+    transition: color 0.3s ease;
+  }
+
+  .social-btn:hover .rg-text {
+    color: var(--color-white);
+  }
+
+  .rg-text sup {
+    font-size: 8px;
+    vertical-align: super;
+  }
+
+  /* Google Form Card */
+  .google-form-card {
+    background: var(--color-green-bg);
+    border: 1px solid var(--color-primary);
+    border-radius: 24px;
+    padding: 38px 32px;
+    box-shadow: 0 4px 24px rgba(141, 119, 171, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .google-form-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(141, 119, 171, 0.15);
+  }
+
+  .form-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+    box-shadow: 0 10px 26px rgba(141, 119, 171, 0.22);
+  }
+
+  .card-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--color-text-black);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .card-subtitle {
+    font-size: 16px;
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto 32px;
+  }
+
+  .btn-google-form {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 32px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(141, 119, 171, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-google-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .btn-google-form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(141, 119, 171, 0.4);
+  }
+
+  .btn-google-form:hover::before {
+    left: 100%;
+  }
+
+  .btn-google-form:active {
+    transform: translateY(0);
+  }
+
+  .hint-text {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--color-gray);
+    font-style: italic;
+  }
+
+  @media (max-width: 968px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .info-sidebar {
+      order: 2;
+      margin-top: 24px;
+    }
+
+    .form-section {
+      order: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-page {
+      padding-top: 96px;
+    }
+
+    .hero-title {
+      font-size: 36px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+    }
+
+    .contact-hero {
+      padding: 24px 0 24px;
+    }
+
+    .contact-content {
+      padding: 24px 0 60px;
+    }
+
+    .info-card {
+      padding: 16px 18px;
+      gap: 14px;
+    }
+
+    .icon-wrapper {
+      width: 40px;
+      height: 40px;
+    }
+
+    .info-card h3 {
+      font-size: 13px;
+    }
+
+    .contact-link {
+      font-size: 14px;
+    }
+
+    .google-form-card {
+      padding: 40px 24px;
+    }
+
+    .form-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      font-size: 28px;
+    }
+
+    .card-subtitle {
+      font-size: 15px;
+    }
+
+    .btn-google-form {
+      font-size: 16px;
+      padding: 14px 24px;
+    }
+  }
+</style>

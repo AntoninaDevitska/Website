@@ -1,0 +1,116 @@
+# Service categories and their courses. Order here = order on the site.
+- name: BREATHE Teaching and Wellbeing Forum (10-12 July, 2026)
+  slug: breathe-teaching-and-wellbeing-forum
+  legacy_id: 54c0cbbf-8e95-4f03-bdad-38bec8698452
+  courses: []
+- name: Featured Courses
+  slug: featured-courses
+  legacy_id: 698c5e1e-7b8e-4c23-b9ec-9ab16f2341c2
+  courses:
+    - title: Teaching in Times of Uncertainty
+      description: Learn how to create a stable, supportive learning environment for your students when the world feels unpredictable. This program provides essential strategies for managing stress and adapting your teaching methods to changing realities.
+      lessons: 10 lessons
+      duration: 40 hours
+      enroll_link: https://app.voccent.com/jc/titou2025
+      tags:
+        - teachers
+        - mentors
+        - leaders
+      image: /uploads/courses/teaching-in-times-of-uncertainty.jpg
+    - title: "The Power of You: Resilience, Self-Care & Mindful Living in Uncertain Times"
+      description: A practical course focused on building resilience, practicing self-care, and developing mindful habits to navigate uncertainty with confidence.
+      lessons: 12 lessons
+      duration: 4 weeks
+      enroll_link: https://app.voccent.com/jc/powerofyou
+      tags:
+        - educators
+        - teachers
+      image: /uploads/courses/the-power-of-you-resilience-self-care-mindful.jpg
+- name: Teacher Training & Workshops
+  slug: teacher-training-workshops
+  legacy_id: 205bf030-f6f2-4982-b575-7bdd36286b51
+  courses:
+    - title: "Finding Calm in the Chaos: Coping Strategies & Mindfulness"
+      description: |-
+        Reclaim your peace of mind and prevent burnout with practical, restorative practices.
+        Educators often pour from an empty cup. This session is designed to refill it. In this restorative workshop, we move beyond generic advice to practice concrete mindfulness techniques specifically tailored for the high-stress environment of a school. Learn how to manage nervous system regulation and build a personal toolkit for resilience.
+      lessons: ""
+      duration: ""
+      enroll_link: https://docs.google.com/forms/d/e/1FAIpQLSfwdt5K9ayXudT35HYiXhRhDLPnx34EQ8sCaHknQwIYplPAKQ/viewform
+      tags:
+        - All educators
+        - support staff
+        - administrators feeling the weight of the profession and seeking sustainable wellness
+      image: /uploads/courses/finding-calm-in-the-chaos-coping-strategies.jpg
+    - title: AI-Enhanced Creative Writing for the EFL Classroom
+      description: |-
+        Inspire authentic voice, imagination, and confident expression  with the support of AI
+        Creative writing should feel liberating, not intimidating for teachers or learners. You will explore how tools like ChatGPT, Canva, and AI-assisted prompts can help you design engaging creative writing tasks, scaffold language use, and give meaningful feedback  without replacing the human voice at the heart of writing.
+      lessons: ""
+      duration: ""
+      enroll_link: https://docs.google.com/forms/d/e/1FAIpQLSfwdt5K9ayXudT35HYiXhRhDLPnx34EQ8sCaHknQwIYplPAKQ/viewform
+      tags:
+        - EFL/ESL teachers
+        - teacher trainers
+        - educators interested in human-centered
+        - future-ready teaching practices
+      image: /images/service-1.png
+    - title: "Pairwork Strategies: A Few Recipes"
+      description: |-
+        Make the use of pairwork indispensable.
+        Develop speaking skills through guided opportunities in learner-to-learner  interaction. In this practical workshop the participants will learn how to boost the students’ communicative skills by using pairwork. Special attention is paid to setting up pairwork at the preparatory stage which is usually not paid much attention to by the majority of teachers. We dwell on  traditional and  random techniques of pairing the learners which require forethought and are therefore a part of the lesson planning process.
+      lessons: ""
+      duration: ""
+      enroll_link: https://docs.google.com/forms/d/e/1FAIpQLSfwdt5K9ayXudT35HYiXhRhDLPnx34EQ8sCaHknQwIYplPAKQ/viewform
+      tags:
+        - Pre-service and in-service English language teachers
+      image: /uploads/courses/pairwork-strategies-a-few-recipes.jpg
+    - title: "Cultivating Emotional Intelligence: The SEL Workshop"
+      description: |-
+        Transform your classroom culture by mastering Social and Emotional Learning.
+        Move beyond academics and address the "whole child." In this immersive workshop, educators will learn evidence-based strategies to integrate Social and Emotional Learning (SEL) into daily instruction. We focus on building the five core competencies: self-awareness, self-management, social awareness, relationship skills, and responsible decision-making.
+      lessons: ""
+      duration: ""
+      enroll_link: https://docs.google.com/forms/d/e/1FAIpQLSfwdt5K9ayXudT35HYiXhRhDLPnx34EQ8sCaHknQwIYplPAKQ/viewform
+      tags:
+        - K-12 Teachers
+        - School Counselors
+        - Administrators looking to reduce burnout and improve student behavior
+      image: /uploads/courses/cultivating-emotional-intelligence-the-sel.jpg
+    - title: "Collaborative Growth: Mastering Peer Observations"
+      description: |-
+        Unlock the expertise within your own school through structured, non-judgmental feedback.
+        Teaching can often feel like a solitary profession, but your greatest resource is the teacher next door. This workshop shifts the mindset from "evaluation" to "collaboration." Participants will learn how to design and implement a peer observation cycle that builds trust, encourages reflective practice, and spreads best practices across the faculty.
+      lessons: ""
+      duration: ""
+      enroll_link: https://docs.google.com/forms/d/e/1FAIpQLSfwdt5K9ayXudT35HYiXhRhDLPnx34EQ8sCaHknQwIYplPAKQ/viewform
+      tags:
+        - Department Heads
+        - Instructional Coaches
+        - Teachers interested in professional learning communities (PLCs)
+      image: /uploads/courses/collaborative-growth-mastering-peer-observations.jpg
+    - title: AI-Powered Strategies for the Modern EFL Classroom
+      description: |-
+        Future-proof your teaching: Save time and personalize learning with Artificial Intelligence.
+        Stop drowning in lesson planning and grading. This hands-on workshop is designed specifically for English as a Foreign Language (EFL) educators who want to harness the power of AI tools (like ChatGPT, MagicSchool, and Canva). Learn how to ethically and effectively use AI to create materials, differentiate instruction, and engage digital-native students.
+      lessons: "10"
+      duration: 4 Weeks
+      enroll_link: https://docs.google.com/forms/d/e/1FAIpQLSfwdt5K9ayXudT35HYiXhRhDLPnx34EQ8sCaHknQwIYplPAKQ/viewform
+      tags:
+        - EFL/ESL
+        - Teachers
+        - Language Department Coordinators
+        - EdTech enthusiasts.
+      image: /uploads/courses/ai-powered-strategies-for-the-modern-efl-classroom.jpg
+- name: Other Courses & Academic Programs
+  slug: other-courses-academic-programs
+  legacy_id: d025edf8-1310-4a97-a445-884c393db3bf
+  courses: []
+- name: Speaking & Collaborations
+  slug: speaking-collaborations
+  legacy_id: dd1f1924-3f57-4aec-aacd-71fedd1d4e83
+  courses: []
+- name: Mentorship & Consulting
+  slug: mentorship-consulting
+  legacy_id: 06c39ae1-c28a-4463-ba95-ada17b35e97a
+  courses: []

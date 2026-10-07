@@ -1,0 +1,545 @@
+---
+interface Props {
+  landingHref?: string;
+  storageKey?: string;
+}
+
+const {
+  landingHref = "/breathe-forum-2.html",
+  storageKey = "breathe_retreat_popup_v1",
+} = Astro.props;
+---
+
+<!-- STICKY BAR -->
+<div class="breathe-bar" data-breathe-bar>
+  <div class="breathe-bar__shell">
+    <div class="breathe-bar__inner">
+      <div class="breathe-bar__text">
+        <div class="breathe-bar__title">🌿 BREATHE: Teaching &amp; Wellbeing Retreat</div>
+        <div class="breathe-bar__meta">10–12 July 2026 · Carpathian Mountains · Voevodyno Resort</div>
+      </div>
+      <div class="breathe-bar__actions">
+        <a class="breathe-bar__register" href={landingHref}>Learn more</a>
+        <button type="button" class="breathe-bar__close" data-breathe-bar-close aria-label="Hide">✕</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAB (shown when bar is hidden) -->
+<button type="button" class="breathe-fab" data-breathe-bar-show aria-label="Show" hidden>
+  🌿 BREATHE
+</button>
+
+<!-- MODAL POPUP -->
+<div class="breathe-popup" data-breathe data-storage-key={storageKey} hidden>
+  <div class="breathe-popup__backdrop" data-breathe-close></div>
+
+  <div
+    class="breathe-popup__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="breathe-title"
+    tabindex="-1"
+  >
+    <button
+      type="button"
+      class="breathe-popup__close"
+      data-breathe-close
+      aria-label="Close"
+    >✕</button>
+
+    <div class="breathe-popup__rings" aria-hidden="true">
+      <span class="r r1"></span>
+      <span class="r r2"></span>
+      <span class="r r3"></span>
+    </div>
+
+    <div class="breathe-popup__content">
+      <div class="breathe-popup__kicker">Retreat for educators · 2026</div>
+
+      <h2 id="breathe-title" class="breathe-popup__title">
+        BREATHE<br /><em>Teaching &amp; Wellbeing</em>
+      </h2>
+
+      <p class="breathe-popup__tagline">
+        A retreat where pedagogy meets wellbeing.<br />Stop. Breathe. Feel your calling again.
+      </p>
+
+      <div class="breathe-popup__pills">
+        <span class="bp">📅 10–12 July 2026</span>
+        <span class="bp">🏔 Carpathian Mountains</span>
+        <span class="bp">🌿 Voevodyno Resort</span>
+      </div>
+
+      <a class="breathe-popup__cta" href={landingHref}>
+        Learn more →
+      </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    if ((window.location.pathname || '').startsWith('/admin')) return;
+
+    const modal       = document.querySelector('[data-breathe]');
+    const bar         = document.querySelector('[data-breathe-bar]');
+    const fab         = document.querySelector('[data-breathe-bar-show]');
+    const barCloseBtn = document.querySelector('[data-breathe-bar-close]');
+    const barShowBtn  = document.querySelector('[data-breathe-bar-show]');
+    const modalOpenBtns = Array.from(document.querySelectorAll('[data-breathe-modal-open]'));
+    const dialog      = modal?.querySelector('.breathe-popup__dialog');
+
+    if (!modal) return;
+
+    const key        = modal.getAttribute('data-storage-key') || 'breathe_retreat_popup_v1';
+    const BAR_KEY    = key + '__bar_min';
+
+    // ── BAR ──────────────────────────────────────────────────────────
+    const isBarMin = () => { try { return localStorage.getItem(BAR_KEY) === '1'; } catch { return false; } };
+
+    const setBarMin = (min) => {
+      if (min) {
+        try { localStorage.setItem(BAR_KEY, '1'); } catch {}
+        bar?.setAttribute('hidden', '');
+        if (fab) fab.hidden = false;
+        document.body.classList.remove('breathe-bar-on');
+      } else {
+        try { localStorage.removeItem(BAR_KEY); } catch {}
+        bar?.removeAttribute('hidden');
+        if (fab) fab.hidden = true;
+        document.body.classList.add('breathe-bar-on');
+      }
+    };
+
+    setBarMin(isBarMin());
+    barCloseBtn?.addEventListener('click', () => setBarMin(true));
+    barShowBtn?.addEventListener('click',  () => setBarMin(false));
+
+    // ── MODAL ─────────────────────────────────────────────────────────
+    const state = { open: false, last: null };
+
+    const shouldOpen = () => { try { return localStorage.getItem(key) !== '1'; } catch { return true; } };
+
+    const openModal = () => {
+      if (state.open) return;
+      state.open = true;
+      state.last = document.activeElement;
+      modal.hidden = false;
+      requestAnimationFrame(() => {
+        modal.classList.add('is-open');
+        dialog?.focus();
+      });
+      document.body.classList.add('breathe-no-scroll');
+    };
+
+    const closeModal = () => {
+      if (!state.open) return;
+      state.open = false;
+      modal.classList.remove('is-open');
+      document.body.classList.remove('breathe-no-scroll');
+      setTimeout(() => { modal.hidden = true; }, 280);
+      try { localStorage.setItem(key, '1'); } catch {}
+      state.last?.focus?.();
+    };
+
+    const closeTriggers = Array.from(modal.querySelectorAll('[data-breathe-close]'));
+    for (const el of closeTriggers) {
+      if (el.tagName === 'BUTTON') el.addEventListener('click', closeModal);
+      else el.addEventListener('click', (e) => { if (e.target === el) closeModal(); });
+    }
+
+    for (const btn of modalOpenBtns) btn.addEventListener('click', openModal);
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    if (shouldOpen()) window.setTimeout(openModal, 400);
+  })();
+</script>
+
+<style is:global>
+  :global(body.breathe-no-scroll) { overflow: hidden; }
+
+  :global(body.breathe-bar-on) { padding-bottom: 82px; }
+  @media (max-width: 600px) {
+    :global(body.breathe-bar-on) { padding-bottom: 130px; }
+  }
+
+  /* ── BAR ── */
+  .breathe-bar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 9999;
+    padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .breathe-bar__shell {
+    max-width: 1080px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, #BAD8B6 0%, #E7F0D4 50%, #BAD8B6 100%);
+    border: 1px solid rgba(141, 119, 171, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(141, 119, 171, 0.18);
+    padding: 12px 16px;
+  }
+
+  .breathe-bar__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .breathe-bar__title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #01162C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .breathe-bar__meta {
+    margin-top: 2px;
+    font-size: 12px;
+    color: rgba(1, 22, 44, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .breathe-bar__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .breathe-bar__register {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .breathe-bar__register:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(141, 119, 171, 0.35);
+    background: var(--color-primary-dark);
+  }
+
+  .breathe-bar__details {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(250, 246, 239, 0.7);
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 160ms ease;
+  }
+
+  .breathe-bar__details:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #faf6ef;
+  }
+
+  .breathe-bar__close {
+    width: 38px; height: 38px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(1, 22, 44, 0.15);
+    background: rgba(1, 22, 44, 0.06);
+    color: rgba(1, 22, 44, 0.45);
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 160ms ease, color 160ms ease;
+    flex-shrink: 0;
+  }
+
+  .breathe-bar__close:hover {
+    background: rgba(1, 22, 44, 0.12);
+    color: rgba(1, 22, 44, 0.85);
+  }
+
+  .breathe-fab {
+    position: fixed;
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    z-index: 9999;
+    padding: 11px 18px;
+    border-radius: 999px;
+    background: var(--color-green-light);
+    color: #01162C;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid rgba(141, 119, 171, 0.25);
+    box-shadow: 0 8px 24px rgba(141, 119, 171, 0.2);
+    cursor: pointer;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+
+  .breathe-fab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(141, 119, 171, 0.3);
+  }
+
+  @media (max-width: 600px) {
+    .breathe-bar__inner {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      position: relative;
+      padding-right: 44px;
+    }
+    .breathe-bar__actions {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .breathe-bar__register { flex: 1; justify-content: center; }
+    .breathe-bar__details  { flex: 1; text-align: center; }
+    .breathe-bar__close {
+      position: absolute;
+      top: 4px; right: 0;
+    }
+    .breathe-bar__title { white-space: normal; }
+  }
+
+  .breathe-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+  }
+
+  .breathe-popup[hidden] {
+    display: none !important;
+  }
+
+  .breathe-popup__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 14, 9, 0.72);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 280ms ease;
+    cursor: pointer;
+  }
+
+  .breathe-popup.is-open .breathe-popup__backdrop {
+    opacity: 1;
+  }
+
+  .breathe-popup__dialog {
+    position: relative;
+    z-index: 1;
+    width: min(540px, calc(100vw - 32px));
+    background: linear-gradient(145deg, #0d2016 0%, #1a3c2e 55%, #0e2318 100%);
+    border: 1px solid rgba(82, 183, 136, 0.18);
+    border-radius: 4px;
+    padding: 52px 48px 48px;
+    overflow: hidden;
+    outline: none;
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(201, 168, 76, 0.08) inset;
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    transition:
+      opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .breathe-popup.is-open .breathe-popup__dialog {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .breathe-popup__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(250, 246, 239, 0.45);
+    font-size: 14px;
+    transition: background 160ms ease, color 160ms ease;
+    cursor: pointer;
+  }
+
+  .breathe-popup__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(250, 246, 239, 0.9);
+  }
+
+  /* Decorative rings */
+  .breathe-popup__rings {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    pointer-events: none;
+  }
+
+  .r {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(82, 183, 136, 0.1);
+    animation: ring-pulse 5s ease-in-out infinite;
+  }
+
+  .r1 { width: 160px; height: 160px; animation-delay: 0s; }
+  .r2 { width: 260px; height: 260px; animation-delay: 1.5s; }
+  .r3 { width: 360px; height: 360px; animation-delay: 3s; }
+
+  @keyframes ring-pulse {
+    0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.04); }
+  }
+
+  .breathe-popup__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .breathe-popup__kicker {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .breathe-popup__kicker::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: #c9a84c;
+    opacity: 0.7;
+  }
+
+  .breathe-popup__title {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: clamp(42px, 8vw, 64px);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    color: #faf6ef;
+    margin-bottom: 20px;
+  }
+
+  .breathe-popup__title em {
+    font-style: italic;
+    font-weight: 400;
+    color: #52b788;
+    letter-spacing: -1px;
+  }
+
+  .breathe-popup__tagline {
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(250, 246, 239, 0.55);
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .breathe-popup__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .bp {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid rgba(82, 183, 136, 0.25);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: rgba(250, 246, 239, 0.6);
+  }
+
+  .breathe-popup__topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 32px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .breathe-popup__topics span {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(82, 183, 136, 0.65);
+    padding: 4px 10px;
+    background: rgba(82, 183, 136, 0.06);
+    border: 1px solid rgba(82, 183, 136, 0.12);
+  }
+
+  .breathe-popup__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #c9a84c, #f0d080);
+    color: #0b1a12;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .breathe-popup__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(201, 168, 76, 0.35);
+  }
+
+  @media (max-width: 600px) {
+    .breathe-popup__dialog {
+      padding: 40px 28px 36px;
+    }
+
+    .breathe-popup__title {
+      font-size: 46px;
+      letter-spacing: -1.5px;
+    }
+
+    .breathe-popup__cta {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

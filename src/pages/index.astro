@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import QuoteBanner from '../components/QuoteBanner.astro';
+// import AboutSection from '../components/AboutSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import CTASection from '../components/CTASection.astro';
+import BlogSection from '../components/BlogSection.astro';
+import Footer from '../components/Footer.astro';
+import TestimonialsSlider from '../components/TestimonialsSlider.astro';
+---
+
+<Layout>
+  <Header currentPage="home" />
+  
+  <main>
+    <Hero />
+    <QuoteBanner />
+    <!-- <AboutSection /> -->
+    <ServicesSection />
+    <TestimonialsSlider />
+    <CTASection />
+
+    <BlogSection />
+  </main>
+  
+  <Footer />
+</Layout>
+

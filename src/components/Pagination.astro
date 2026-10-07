@@ -1,0 +1,190 @@
+---
+interface Props {
+  currentPage?: number;
+  totalPages?: number;
+}
+
+const { currentPage = 1, totalPages = 1 } = Astro.props;
+
+const getPageNumbers = () => {
+  const pages: (number | string)[] = [];
+  
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(i);
+    }
+  } else {
+    pages.push(1, 2);
+    
+    if (currentPage > 3) {
+      pages.push('...');
+    }
+    
+    if (currentPage > 2 && currentPage < totalPages - 1) {
+      pages.push(currentPage);
+    }
+    
+    if (currentPage < totalPages - 2) {
+      pages.push('...');
+    }
+    
+    pages.push(totalPages - 1, totalPages);
+  }
+  
+  const seen = new Set();
+  return pages.filter(page => {
+    if (seen.has(page)) return false;
+    seen.add(page);
+    return true;
+  });
+};
+
+const pageNumbers = getPageNumbers();
+---
+
+<nav class="pagination" aria-label="Pagination">
+  {currentPage > 1 ? (
+    <a 
+      href={currentPage - 1 === 1 ? '/blog' : `/blog/${currentPage - 1}`}
+      class="pagination-btn arrow" 
+      aria-label="Previous page"
+    >
+      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1L1.5 6.5L7 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  ) : (
+    <button 
+      class="pagination-btn arrow" 
+      disabled
+      aria-label="Previous page"
+    >
+      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1L1.5 6.5L7 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  )}
+  
+  {pageNumbers.map(page => (
+    page === '...' ? (
+      <span class="pagination-btn ellipsis">...</span>
+    ) : typeof page === 'number' ? (
+      page === currentPage ? (
+        <span class="pagination-btn number active">{page}</span>
+      ) : (
+        <a 
+          href={page === 1 ? '/blog' : `/blog/${page}`}
+          class="pagination-btn number"
+        >
+          {page}
+        </a>
+      )
+    ) : null
+  ))}
+  
+  {currentPage < totalPages ? (
+    <a 
+      href={`/blog/${currentPage + 1}`}
+      class="pagination-btn arrow" 
+      aria-label="Next page"
+    >
+      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L6.5 6.5L1 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  ) : (
+    <button 
+      class="pagination-btn arrow" 
+      disabled
+      aria-label="Next page"
+    >
+      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L6.5 6.5L1 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  )}
+</nav>
+
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 60px;
+  }
+  
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #DFE3E8;
+    border-radius: 4px;
+    background: var(--color-white);
+    color: #212B36;
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  
+  .pagination-btn:hover:not(:disabled):not(.ellipsis) {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  
+  .pagination-btn.active {
+    background: var(--color-white);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    cursor: default;
+  }
+  
+  .pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination-btn.ellipsis {
+    border: none;
+    background: transparent;
+    cursor: default;
+  }
+  
+  .pagination-btn.arrow {
+    color: #637381;
+  }
+  
+  .pagination-btn.arrow:hover:not(:disabled) {
+    color: var(--color-primary);
+  }
+  
+  @media (max-width: 480px) {
+    .pagination {
+      gap: 4px;
+    }
+    
+    .pagination-btn {
+      width: 30px;
+      height: 30px;
+      font-size: 12px;
+    }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+

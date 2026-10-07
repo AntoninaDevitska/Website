@@ -1,0 +1,123 @@
+---
+interface Props {
+  quote?: string;
+}
+
+const { quote } = Astro.props;
+---
+
+<section class="quote-banner">
+  <div class="container">
+    <div class="quote-card" role="note" aria-label="Tagline">
+      <img
+        class="quote-logo"
+        src="/images/Logo.png"
+        alt="Education and Wellbeing by Antonina Devitska"
+        loading="lazy"
+        decoding="async"
+        width="120"
+        height="120"
+      />
+
+      {quote ? (
+        <p class="quote-text quote-text--custom">{quote}</p>
+      ) : (
+      <p class="quote-text">
+  <span>Where </span>
+  <span class="accent">learning</span><span>, </span>
+  <span class="accent">connection</span><span>, and </span>
+  <span class="accent">creativity</span>
+  <span> COME TO LIFE</span>
+</p>
+
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .quote-banner {
+    background: var(--gradient-banner);
+    padding: 25px 0;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-card {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .quote-logo {
+    width: 170px;
+    height: auto;
+    display: block;
+    margin: 0 auto 18px;
+    filter: drop-shadow(0 12px 24px rgba(1, 22, 44, 0.25));
+  }
+
+  .quote-text {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.18;
+    color: #000000;
+    letter-spacing: -0.01em;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    padding: 14px 36px;
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    display: inline-block;
+    box-shadow: 
+      0 8px 32px rgba(71, 57, 90, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+  }
+
+  .accent {
+    color: #59457b;
+    font-weight: 700;
+  }
+
+  @media (max-width: 968px) {
+    .quote-banner {
+      padding: 56px 0;
+    }
+
+    .quote-logo {
+      width: 104px;
+      margin-bottom: 16px;
+    }
+
+    .quote-text {
+      font-size: 28px;
+      line-height: 1.1;
+      padding: 12px 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .quote-banner {
+      padding: 42px 0;
+    }
+
+    .quote-logo {
+      width: 88px;
+      margin-bottom: 14px;
+    }
+
+    .quote-text {
+      font-size: 20px;
+      line-height: 1.4;
+      padding: 10px 22px;
+      white-space: normal;
+    }
+  }
+</style>

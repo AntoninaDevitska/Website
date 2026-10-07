@@ -1,0 +1,273 @@
+---
+const testimonials = [
+{
+    quote: '“I have worked closely with Antonina Devitska since 2023 on international train-the-trainer and faculty development initiatives. Her commitment to meaningful, inclusive education and her capacity to turn vision into impactful practice make her a highly respected and trusted collaborator.”',
+    name: 'Dr. Lynne Hindman, Oregon State University',
+    icon: '/images/testimonial-rating.svg',
+  },
+  {
+    quote: '“I can\'t wait to incorporate what I\'ve learned into my teaching — I know it’ll make a difference.”',
+    name: 'Tetyana',
+    course: 'The Power of You',
+    icon: '/images/testimonial-rating.svg',
+  },
+  {
+    quote: '“I never thought sharing my emotions could be so empowering!”',
+    name: 'Mykhaylo',
+    course: 'The Power of You',
+    icon: '/images/testimonial-rating.svg',
+  },
+  {
+    quote: '“This course is eye-opening for me. I’ve already started opening up to my friends, and it’s strengthened our relationships!”',
+    name: 'Lidiya',
+    course: 'The Power of You',
+    icon: '/images/testimonial-rating.svg',
+  },
+  {
+    quote: '“Now I learned the value of being open!”',
+    name: 'Dmytro',
+    course: 'The Power of You',
+    icon: '/images/testimonial-rating.svg',
+  },
+  {
+    quote: '“Before I never realized how much I was holding back. Now, I see the value in sharing my fears and hopes — it’s liberating. I’ve even noticed a change in how I interact with my loved ones.”',
+    name: 'Nataliya',
+    course: 'The Power of You',
+    icon: '/images/testimonial-rating.svg',
+  },
+];
+
+const copies = [0, 1, 2];
+const slides = copies.flatMap((copy) =>
+  testimonials.map((t, i) => ({
+    ...t,
+    realIndex: i,
+    copy,
+  }))
+);
+---
+
+<section class="testimonials-slider" aria-label="Testimonials">
+  <div class="container">
+    <div class="section-heading">
+      <h2>What People Say About Our Services</h2>
+    </div>
+
+    <div class="slider-window" id="testimonialWindow" role="region" aria-label="Testimonials carousel">
+      <div class="slider-track" id="testimonialTrack">
+        {slides.map((testimonial) => (
+          <article
+            class="testimonial-card"
+            data-real-index={testimonial.realIndex}
+            data-copy={testimonial.copy}
+          >
+            <div class="emoji">
+              <img src={testimonial.icon} alt="testimonial icon" />
+            </div>
+            <p class="quote">{testimonial.quote}</p>
+            <div class="testimonial-footer">
+            <p class="author">{testimonial.name}</p>
+            
+            {testimonial.course && (
+              <p class="course-info">
+                <span class="label">Course:</span> 
+                <span class="course-name">{testimonial.course}</span>
+              </p>
+            )}
+          </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="slider-controls">
+      <button class="control-btn" id="testimonialPrev" aria-label="Previous testimonial">←</button>
+      <button class="control-btn" id="testimonialNext" aria-label="Next testimonial">→</button>
+    </div>
+  </div>
+
+  <script type="module">
+    // ... ваш існуючий JS код без змін ...
+    const windowEl = document.getElementById('testimonialWindow');
+    const track = document.getElementById('testimonialTrack');
+    const prev = document.getElementById('testimonialPrev');
+    const next = document.getElementById('testimonialNext');
+    let activeEl = null;
+    let scrollTimeout;
+    const cards = Array.from(track?.querySelectorAll('.testimonial-card') ?? []);
+    function setActiveEl(el) {
+      if (!(el instanceof Element)) return;
+      if (activeEl && activeEl !== el) activeEl.classList.remove('is-active');
+      el.classList.add('is-active');
+      activeEl = el;
+    }
+    function getCopyWidth() {
+      const a = track?.querySelector('.testimonial-card[data-copy="0"][data-real-index="0"]');
+      const b = track?.querySelector('.testimonial-card[data-copy="1"][data-real-index="0"]');
+      if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0;
+      return b.offsetLeft - a.offsetLeft;
+    }
+    function rebalance() {
+      if (!windowEl) return;
+      const copyWidth = getCopyWidth();
+      if (!copyWidth) return;
+      const scrollLeft = windowEl.scrollLeft;
+      if (scrollLeft >= copyWidth * 1.8) {
+        windowEl.style.scrollSnapType = 'none';
+        windowEl.scrollLeft -= copyWidth;
+        windowEl.style.scrollSnapType = 'x mandatory';
+      } else if (scrollLeft <= copyWidth * 0.2) {
+        windowEl.style.scrollSnapType = 'none';
+        windowEl.scrollLeft += copyWidth;
+        windowEl.style.scrollSnapType = 'x mandatory';
+      }
+    }
+    next?.addEventListener('click', () => {
+      if (!windowEl || !activeEl) return;
+      const idx = cards.indexOf(activeEl);
+      const target = cards[idx + 1];
+      if (target) { windowEl.scrollTo({ left: target.offsetLeft, behavior: 'smooth' }); }
+    });
+    prev?.addEventListener('click', () => {
+      if (!windowEl || !activeEl) return;
+      const idx = cards.indexOf(activeEl);
+      const target = cards[idx - 1];
+      if (target) { windowEl.scrollTo({ left: target.offsetLeft, behavior: 'smooth' }); }
+    });
+    function updateActiveByCenter() {
+      if (!windowEl) return;
+      const windowCenter = windowEl.scrollLeft + (windowEl.offsetWidth / 2);
+      let closestCard = null;
+      let minDistance = Infinity;
+      cards.forEach(card => {
+        const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+        const distance = Math.abs(windowCenter - cardCenter);
+        if (distance < minDistance) { minDistance = distance; closestCard = card; }
+      });
+      if (closestCard) setActiveEl(closestCard);
+    }
+    const startCard = track?.querySelector('.testimonial-card[data-copy="1"][data-real-index="0"]');
+    if (startCard) { windowEl.scrollLeft = startCard.offsetLeft; setActiveEl(startCard); }
+    windowEl?.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      updateActiveByCenter();
+      scrollTimeout = setTimeout(rebalance, 100);
+    }, { passive: true });
+  </script>
+</section>
+
+<style>
+  .testimonials-slider {
+    padding: 70px 0;
+    background: var(--color-bg-soft);
+  }
+
+  .section-heading h2 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 46px;
+    line-height: 1.14;
+    color: var(--color-text-black);
+    margin-bottom: 40px;
+  }
+
+  .slider-window {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .slider-window::-webkit-scrollbar { display: none; }
+
+  .slider-track {
+    display: flex;
+    gap: 24px;
+    padding: 10px 0 40px;
+  }
+
+  .testimonial-card {
+    flex: 0 0 calc((100% - 48px) / 3); 
+    border-radius: 32px;
+    padding: 40px;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: white;
+    border: 1px solid rgba(141, 119, 171, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    scroll-snap-align: start;
+  }
+
+  .quote {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--color-text-black);
+  }
+
+  .testimonial-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .author {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-text-black);
+  }
+
+  .course-info {
+    font-size: 14px;
+    margin-top: 2px;
+    color: var(--color-text-muted);
+  }
+
+  .course-info .label {
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  .course-info .course-name {
+    font-style: italic;
+  }
+
+  .emoji img {
+    width: 56px;
+    height: auto;
+    display: block;
+  }
+
+  .slider-controls {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .control-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--color-primary);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .control-btn:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  @media (max-width: 1100px) {
+    .testimonial-card { flex: 0 0 calc((100% - 24px) / 2); }
+  }
+
+  @media (max-width: 768px) {
+    .testimonial-card { flex: 0 0 100%; min-height: 240px; }
+    .section-heading h2 { font-size: 28px; text-align: center; }
+  }
+</style>

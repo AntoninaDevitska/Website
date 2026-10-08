@@ -1,14 +1,12 @@
 ---
 title: DEVELOPMENT OF PROFESSIONAL REFLECTION SKILLS IN ENGLISH CLASSROOM OBSERVATION
-excerpt: ""
-author: Datsko Yu.M., Devitska A.I., Melnyk I.Ye.
 date: 2025-09-12
+author: Datsko Yu., Devitska A., Melnyk I.
 category: Education, Pegagogy, Classroom Observation
-featured: true
 image: /uploads/articles/development-of-professional-reflection-skills-in-english.jpg
+featured: true
 legacy_id: 18d3c800-1a4e-4677-bde2-86fb8633c626
 ---
-
 Observation of classroom performance is viewed from the ‘cyclical model of lesson observation’ which consists ofthree stages: the pre-observation meeting; observation of the lesson and post-observation discussion. The tasks for theobservers are specified for each stage. The authors suggest using ‘Your Smart Observation App’ worked out by themto modernize the process of observation with technologies which can turn it into an inspiring and motivating students’professional learning opportunity. The App contains a number of templates for lesson observation designed according to thedomains: ‘Classroom Environment’, ‘Instruction’, ‘Self-Reflection’ and ‘Resources’. The notions of «general observation»and «focused observation» are distinguished for the observation stage. Examples of observation templates are suggestedfor evaluating the performance of student teachers. They have common basis for discussion at the post-observation stageand can help the students concentrate on some particular aspects of the lesson.Special attention is paid to correlation between observation and the development of professional reflection skills in thepost-observation discussion. Classroom observation ensures student teachers gain a better understanding of their teachingthrough self-reflection or reflection in small groups. Reflection skills may be highly beneficial for the students during theteaching practice as they are used for sharing their professional experience and participating in discussions. Classroomobservation offers student teachers reflective opportunities for personal growth and continuous professional development. 
 
-(PDF) DEVELOPMENT OF PROFESSIONAL REFLECTION SKILLS IN ENGLISH CLASSROOM OBSERVATION. Available from: https://www.researchgate.net/publication/390174289_DEVELOPMENT_OF_PROFESSIONAL_REFLECTION_SKILLS_IN_ENGLISH_CLASSROOM_OBSERVATION [accessed Mar 12 2026].
+(PDF) DEVELOPMENT OF PROFESSIONAL REFLECTION SKILLS IN ENGLISH CLASSROOM OBSERVATION. Available from: [https://www.researchgate.net/publication/390174289_DEVELOPMENT_OF_PROFESSIONAL_REFLECTION_SKILLS_IN_ENGLISH_CLASSROOM_OBSERVATION](https://www.researchgate.net/publication/390174289_DEVELOPMENT_OF_PROFESSIONAL_REFLECTION_SKILLS_IN_ENGLISH_CLASSROOM_OBSERVATION) [accessed Mar 12 2026].

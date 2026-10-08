@@ -248,3 +248,75 @@ content:
         label: Button link
         type: string
         description: A page on this site (e.g. /events) or a full URL.
+
+  - name: events
+    label: Events
+    type: file
+    path: src/content/events.yaml
+    format: yaml
+    fields:
+      - name: intro
+        label: Intro text
+        type: text
+        description: Shown above the event cards.
+      - name: events
+        label: Events
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} — {subtitle}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: subtitle
+            label: Subtitle
+            type: string
+          - name: show
+            label: Show on the page
+            type: boolean
+            default: true
+          - name: status
+            label: Status
+            type: select
+            description: Sets the colour of the label in the card's corner.
+            options:
+              values:
+                - name: upcoming
+                  label: Upcoming
+                - name: past
+                  label: Past
+          - name: label
+            label: Label text
+            type: string
+            description: e.g. "Upcoming · 2026" or "Online Event"
+          - name: emoji
+            label: Emoji
+            type: string
+          - name: color
+            label: Card colour
+            type: select
+            options:
+              values:
+                - name: forest
+                  label: Forest (dark green)
+                - name: sage
+                  label: Sage (light green)
+          - name: description
+            label: Description
+            type: text
+          - name: details
+            label: Details
+            type: string
+            list: true
+            description: Short items such as date and place.
+          - name: button_text
+            label: Button text
+            type: string
+            default: Learn more
+          - name: button_link
+            label: Button link
+            type: string
+            description: A page on this site (e.g. /breathe-forum-2.html) or a full URL. Leave empty to hide the button.

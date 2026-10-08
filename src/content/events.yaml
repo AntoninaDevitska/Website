@@ -1,0 +1,32 @@
+# Events page (/events). Edited in Pages CMS ("Events").
+# Order of the list = order of the cards on the page.
+intro: "These are spaces for educators to pause, connect, and grow. Some happen online, some in person, but all of them are built around the same idea: teaching well starts with taking care of yourself."
+events:
+  - title: BREATHE
+    subtitle: Teaching & Wellbeing Retreat
+    show: true
+    status: upcoming
+    label: Upcoming · 2026
+    emoji: 🌿
+    color: forest
+    description: A retreat where pedagogy meets wellbeing — an immersive in-person experience in the Carpathian Mountains. Stop. Breathe. Feel your calling again.
+    details:
+      - 📅 10–12 July 2026
+      - 🏔 Carpathian Mountains
+      - 🌿 Voevodyno Resort
+    button_text: Learn More
+    button_link: /breathe-forum-2.html
+  - title: BREATHE
+    subtitle: Teaching & Wellbeing Online Forum
+    show: false
+    status: past
+    label: Online Event
+    emoji: 💻
+    color: sage
+    description: A professional learning event for educators who want to strengthen their clarity, emotional wellbeing, and sense of purpose. The event is live on Zoom, so you can join from anywhere in the world. Recordings are available after the event, so you can revisit the sessions at your own pace.
+    details:
+      - 📅 June 27, 2026
+      - 💻 Live on Zoom
+      - 🎥 Recordings available
+    button_text: Learn more
+    button_link: /breathe-forum-v2.html

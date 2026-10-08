@@ -121,4 +121,32 @@ const announcement = defineCollection({
   }),
 });
 
-export const collections = { articles, services, certificates, projects, projectMoments, announcement };
+// Single entry (id "events"): intro text + event cards for /events.
+const events = defineCollection({
+  loader: file('src/content/events.yaml', {
+    parser: (raw) => [{ ...(YAML.parse(raw) ?? {}), id: 'events' }],
+  }),
+  schema: z.object({
+    intro: text,
+    events: z
+      .array(
+        z.object({
+          title: z.string(),
+          subtitle: text,
+          show: z.boolean().default(true),
+          status: z.enum(['upcoming', 'past']).default('upcoming'),
+          label: text,
+          emoji: text,
+          color: z.enum(['forest', 'sage']).default('forest'),
+          description: text,
+          details: z.array(z.string()).nullish().transform((v) => v ?? []),
+          button_text: text,
+          button_link: text,
+        }),
+      )
+      .nullish()
+      .transform((v) => v ?? []),
+  }),
+});
+
+export const collections = { articles, services, certificates, projects, projectMoments, announcement, events };

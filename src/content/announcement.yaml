@@ -1,0 +1,20 @@
+# Site-wide announcement: popup + sticky bar at the bottom of every page.
+# Edited in Pages CMS ("Announcement"). Changing any text shows the popup
+# again once to visitors who closed the previous version.
+enabled: false
+end_date: 2026-07-12
+bar_title: "🌿 BREATHE: Teaching & Wellbeing Retreat"
+bar_details: 10–12 July 2026 · Carpathian Mountains · Voevodyno Resort
+button_label: 🌿 BREATHE
+popup_kicker: Retreat for educators · 2026
+popup_title: BREATHE
+popup_subtitle: Teaching & Wellbeing
+popup_text: |-
+  A retreat where pedagogy meets wellbeing.
+  Stop. Breathe. Feel your calling again.
+popup_details:
+  - 📅 10–12 July 2026
+  - 🏔 Carpathian Mountains
+  - 🌿 Voevodyno Resort
+link_text: Learn more
+link_url: /breathe-forum-2.html

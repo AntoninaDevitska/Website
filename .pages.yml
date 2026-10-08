@@ -194,3 +194,57 @@ content:
       - name: alt
         label: Description (for screen readers)
         type: string
+
+  - name: announcement
+    label: Announcement (popup)
+    type: file
+    path: src/content/announcement.yaml
+    format: yaml
+    fields:
+      - name: enabled
+        label: Show on the site
+        type: boolean
+        default: false
+        description: Turns the popup and the bottom bar on or off on every page.
+      - name: end_date
+        label: Hide after
+        type: date
+        description: Optional. The announcement disappears automatically after this day.
+      - name: bar_title
+        label: Bottom bar — title
+        type: string
+        required: true
+      - name: bar_details
+        label: Bottom bar — details
+        type: string
+        description: e.g. "10–12 July 2026 · Carpathian Mountains"
+      - name: button_label
+        label: Small button text
+        type: string
+        description: Shown in the corner when a visitor hides the bottom bar.
+      - name: popup_kicker
+        label: Popup — small heading
+        type: string
+      - name: popup_title
+        label: Popup — title
+        type: string
+        required: true
+      - name: popup_subtitle
+        label: Popup — subtitle (italic)
+        type: string
+      - name: popup_text
+        label: Popup — text
+        type: text
+      - name: popup_details
+        label: Popup — details
+        type: string
+        list: true
+        description: Short items such as date and place.
+      - name: link_text
+        label: Button text
+        type: string
+        default: Learn more
+      - name: link_url
+        label: Button link
+        type: string
+        description: A page on this site (e.g. /events) or a full URL.

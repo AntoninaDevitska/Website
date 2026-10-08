@@ -1,25 +1,37 @@
 ---
-interface Props {
-  landingHref?: string;
-  storageKey?: string;
-}
+/**
+ * Site-wide announcement (sticky bar + one-time popup), edited in Pages CMS
+ * via src/content/announcement.yaml. Renders nothing when switched off or
+ * past its end date.
+ */
+import { createHash } from 'node:crypto';
+import { getEntry } from 'astro:content';
 
-const {
-  landingHref = "/breathe-forum-2.html",
-  storageKey = "breathe_retreat_popup_v1",
-} = Astro.props;
+const entry = await getEntry('announcement', 'announcement');
+const a = entry?.data;
+
+const today = new Date().toISOString().slice(0, 10);
+const show = !!a && a.enabled && (!a.end_date || a.end_date >= today);
+
+// New content => new key => visitors who closed the old popup see the new one once.
+const storageKey = a
+  ? `announcement_${createHash('sha1').update(JSON.stringify(a)).digest('hex').slice(0, 10)}`
+  : '';
+const textLines = a?.popup_text ? a.popup_text.split('\n') : [];
 ---
 
+{show && a && (
+<Fragment>
 <!-- STICKY BAR -->
 <div class="breathe-bar" data-breathe-bar>
   <div class="breathe-bar__shell">
     <div class="breathe-bar__inner">
       <div class="breathe-bar__text">
-        <div class="breathe-bar__title">🌿 BREATHE: Teaching &amp; Wellbeing Retreat</div>
-        <div class="breathe-bar__meta">10–12 July 2026 · Carpathian Mountains · Voevodyno Resort</div>
+        <div class="breathe-bar__title">{a.bar_title}</div>
+        {a.bar_details && <div class="breathe-bar__meta">{a.bar_details}</div>}
       </div>
       <div class="breathe-bar__actions">
-        <a class="breathe-bar__register" href={landingHref}>Learn more</a>
+        {a.link_url && <a class="breathe-bar__register" href={a.link_url}>{a.link_text || 'Learn more'}</a>}
         <button type="button" class="breathe-bar__close" data-breathe-bar-close aria-label="Hide">✕</button>
       </div>
     </div>
@@ -28,11 +40,11 @@ const {
 
 <!-- FAB (shown when bar is hidden) -->
 <button type="button" class="breathe-fab" data-breathe-bar-show aria-label="Show" hidden>
-  🌿 BREATHE
+  {a.button_label || a.popup_title}
 </button>
 
 <!-- MODAL POPUP -->
-<div class="breathe-popup" data-breathe data-storage-key={storageKey} hidden>
+<div class="breathe-popup" data-breathe data-storage-key={storageKey} data-end-date={a.end_date} hidden>
   <div class="breathe-popup__backdrop" data-breathe-close></div>
 
   <div
@@ -56,33 +68,35 @@ const {
     </div>
 
     <div class="breathe-popup__content">
-      <div class="breathe-popup__kicker">Retreat for educators · 2026</div>
+      {a.popup_kicker && <div class="breathe-popup__kicker">{a.popup_kicker}</div>}
 
       <h2 id="breathe-title" class="breathe-popup__title">
-        BREATHE<br /><em>Teaching &amp; Wellbeing</em>
+        {a.popup_title}{a.popup_subtitle && <Fragment><br /><em>{a.popup_subtitle}</em></Fragment>}
       </h2>
 
-      <p class="breathe-popup__tagline">
-        A retreat where pedagogy meets wellbeing.<br />Stop. Breathe. Feel your calling again.
-      </p>
+      {textLines.length > 0 && (
+        <p class="breathe-popup__tagline">
+          {textLines.map((line, i) => <Fragment>{i > 0 && <br />}{line}</Fragment>)}
+        </p>
+      )}
 
-      <div class="breathe-popup__pills">
-        <span class="bp">📅 10–12 July 2026</span>
-        <span class="bp">🏔 Carpathian Mountains</span>
-        <span class="bp">🌿 Voevodyno Resort</span>
-      </div>
+      {a.popup_details.length > 0 && (
+        <div class="breathe-popup__pills">
+          {a.popup_details.map((detail) => <span class="bp">{detail}</span>)}
+        </div>
+      )}
 
-      <a class="breathe-popup__cta" href={landingHref}>
-        Learn more →
-      </a>
+      {a.link_url && (
+        <a class="breathe-popup__cta" href={a.link_url}>
+          {a.link_text || 'Learn more'} →
+        </a>
+      )}
     </div>
   </div>
 </div>
 
 <script is:inline>
   (() => {
-    if ((window.location.pathname || '').startsWith('/admin')) return;
-
     const modal       = document.querySelector('[data-breathe]');
     const bar         = document.querySelector('[data-breathe-bar]');
     const fab         = document.querySelector('[data-breathe-bar-show]');
@@ -93,7 +107,16 @@ const {
 
     if (!modal) return;
 
-    const key        = modal.getAttribute('data-storage-key') || 'breathe_retreat_popup_v1';
+    // Past the end date (visitor's local day): remove everything, no rebuild needed.
+    const endDate = modal.getAttribute('data-end-date');
+    const now = new Date();
+    const localToday = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, '0'), String(now.getDate()).padStart(2, '0')].join('-');
+    if (endDate && localToday > endDate) {
+      [modal, bar, fab].forEach((el) => el?.remove());
+      return;
+    }
+
+    const key        = modal.getAttribute('data-storage-key');
     const BAR_KEY    = key + '__bar_min';
 
     // ── BAR ──────────────────────────────────────────────────────────
@@ -156,6 +179,8 @@ const {
     if (shouldOpen()) window.setTimeout(openModal, 400);
   })();
 </script>
+</Fragment>
+)}
 
 <style is:global>
   :global(body.breathe-no-scroll) { overflow: hidden; }

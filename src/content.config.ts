@@ -99,4 +99,26 @@ const projectMoments = defineCollection({
   }),
 });
 
-export const collections = { articles, services, certificates, projects, projectMoments };
+// Single entry (id "announcement"): the site-wide popup + sticky bar.
+const announcement = defineCollection({
+  loader: file('src/content/announcement.yaml', {
+    parser: (raw) => [{ ...(YAML.parse(raw) ?? {}), id: 'announcement' }],
+  }),
+  schema: z.object({
+    enabled: z.boolean().default(false),
+    // Hidden automatically after this day (visitor's local date), even without a rebuild.
+    end_date: z.union([isoDate, z.literal(''), z.null()]).optional().transform((v) => v || undefined),
+    bar_title: z.string(),
+    bar_details: text,
+    button_label: text,
+    popup_kicker: text,
+    popup_title: z.string(),
+    popup_subtitle: text,
+    popup_text: text,
+    popup_details: z.array(z.string()).nullish().transform((v) => v ?? []),
+    link_text: text,
+    link_url: text,
+  }),
+});
+
+export const collections = { articles, services, certificates, projects, projectMoments, announcement };

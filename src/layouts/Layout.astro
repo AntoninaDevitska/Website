@@ -9,7 +9,7 @@ const {
   description = "Educator, mentor, and course designer helping teachers integrate well-being, resilience, and innovation into learning."
 } = Astro.props;
 
-import ForumPopup from "../components/ForumPopup.astro";
+import Announcement from "../components/Announcement.astro";
 ---
 
 <!doctype html>
@@ -44,7 +44,7 @@ import ForumPopup from "../components/ForumPopup.astro";
       });
     </script>
     <div id="top"></div>
-    <ForumPopup />
+    <Announcement />
     <slot />
 
     <script type="module">
